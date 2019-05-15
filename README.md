@@ -1,8 +1,8 @@
 # Tiro-en-dina
 Segundo trabajo grupal del curso de Análisis Numérico I - (UNI)
-Numerical Analysis
 ===
-Bienvenido al repositorio grupal denominado *numerical-analysis* del Curso CM-334.
+Bienvenido al repositorio grupal denominado *Tiro-en-dina
+* del Curso CM-334.
 
 ## Comandos `git`
 
