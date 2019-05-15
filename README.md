@@ -23,8 +23,8 @@ miller@Bobby:~$ git push -u origin master
 
 
 ### Libros de Lectura
-* **Classical and Modern Numerical Analysis**, download [here](https://b-ok.cc/book/2529495/f086ec)
-* **Numerical Analysis Mathematics of Scientific Computing, David Kincaid**, download [here](https://b-ok.cc/book/3501252/9a6099)
+* **Classical and Modern Numerical Analysis**, download it [here](https://b-ok.cc/book/2529495/f086ec)
+* **Numerical Analysis Mathematics of Scientific Computing, David Kincaid**, download it [here](https://b-ok.cc/book/3501252/9a6099)
 
 
 ### Videos
