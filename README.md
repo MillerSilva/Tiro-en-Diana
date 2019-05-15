@@ -29,4 +29,4 @@ miller@Bobby:~$ git push -u origin master
 
 ### Videos
 
-* Videos de Análisis Numérico, watch [here](https://www.youtube.com/watch?v=JPSi-WCOhk4&list=PLoFGL7wppr4tdWBUS-wj-J1AHIVz21fTB)
+* Videos de Análisis Numérico, watch them [here](https://www.youtube.com/watch?v=JPSi-WCOhk4&list=PLoFGL7wppr4tdWBUS-wj-J1AHIVz21fTB)
