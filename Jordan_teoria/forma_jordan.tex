@@ -15,9 +15,8 @@
 \begin{document}
 \maketitle
 
-\section{Forma Canónica de Jordan}
 
-\subsection{Forma Canónica de Jordan para Operadores Nilpotentes}
+\section{Forma Canónica de Jordan para Operadores Nilpotentes}
 \begin{mydef}[Operadores Lineales Nilpotentes]
 	El operador $T:V\rightarrow V$ es nilpotente si $T^{p} = 0$, para algun $p\in\mathbb{N}$.Además se dice que $k\in\mathbb{N}$, es el indide de nilpotencia de $T$ si:
 $$T^{k-1}\neq 0 \wedge T^{k} = 0$$
@@ -133,5 +132,207 @@ $$\begin{bmatrix}
 	\vdots	&	\vdots	& \ddots	& \vdots\\
 	O	&	O	&	\ldots	&	\left[T_{|S_{k}}\right]_{\beta_{k}}
 \end{bmatrix}$$
+
+Note que el bloque $\left[T_{|S_{k}}\right]_{\beta_{k}}$ es más grande (o igual) que el bloque $\left[T_{|S_{m}}\right]_{\beta_{m}}$, para $k > m$, pues $q_{k}\geq q_{m}$.
+
 \end{mynote}
+
+
+\begin{mytheo}[Estructura de la matriz de un Operador Lineal]
+Sea $T:V\rightarrow V, \dim V = n$, up operador lineal nilpotente de indice $q$, entonces:
+\begin{enumerate}
+	\item $\exists q_{1} = q, q_{2}, q_{3},\ldots, q_{r}\in\mathbb{N}\diagup\quad q_{1}\geq q_{2}\geq q_{3}\geq\ldots\geq q_{r}$
+	\item 
+	%\begin{align*}
+	%& \exists v_{1}, v_{2},\ldots, v_{r}\in V\diagup \\
+	%\beta & = \left\{ \\
+	%& T^{q_{1}-1} v_{1}, T^{q_{1}-2} v_{1}, \ldots, T v_{1}, v_{1},\\
+	%& T^{q_{2}-1} v_{2}, T^{q_{2}-2} v_{2}, \ldots, T v_{2}, v_{2},\\
+	%& T^{q_{3}-1} v_{3}, T^{q_{3}-2} v_{3}, \ldots, T v_{3}, v_{3},\\
+	%& \vdots \\
+	%& T^{q_{r}-1} v_{r}, T^{q_{r}-2} v_{r}, \ldots, T v_{r}, v_{r}\right\}
+	%\end{align*}
+	\item
+	$$T_{q_{1}} v_{1} = T^{q_{2}}v_{2} = \ldots = T^{q_{r}}v_{r} = 0$$
+\end{enumerate}
+\end{mytheo}
+
+\begin{myexamp}
+	Hallar la forma canónica de Jordan de la matriz nilpotente.
+	$$\begin{pmatrix}
+		0	&	1	&	0	&	-1\\
+		1	&	0	&	-1	&	0\\
+		0	&	1	&	0	&	-1\\
+		-1	&	0	&	1	&	0
+	\end{pmatrix}$$
+\end{myexamp}
+\textbf{Solución}\\
+Sea $V = \mathbb{R}^{4\times 1}$, definiendo $T:V\rightarrow V$ como:
+\begin{align*}
+	T: V &\rightarrow V\\
+	X &\mapsto TX = AX
+\end{align*}
+Luego $[T]_{\beta} = A, \quad\beta$ base canónica de $\mathbb{R}^{4\times 1}$
+Hallando el indice de nilpotencia de $T$(que es igual a hallar el indice de nilpotencia de $A$)
+$$A^{2} = 
+\begin{bmatrix}
+2	&	0	&	-2	&	0\\
+0	&	0	&	0	&	0\\
+2	&	0	&	-2	&	0\\
+0	&	0	&	0	&	0
+\end{bmatrix},\qquad
+A^{3} = 0
+$$
+Por lo tanto el indice de nilpotencia es $q_{1} = q = 3$.
+Hallando $v_{1}\in\mathbb{R}^{4\times 1}\diagup T^{q_{1}-1}v_{1}\neq 0$
+
+Tomando $v_{1} = 
+\begin{bmatrix}
+	0	\\
+	1	\\
+	1	\\
+	1
+\end{bmatrix}
+$, tenemos $T^{q_{1}-1}v_{1} = T^{2}v_{1} = A^{2}v_{1} = 
+\begin{bmatrix}
+	-2	\\
+	0	\\
+	-2	\\
+	0
+\end{bmatrix}\neq 0
+$
+
+Asi \begin{align*}
+	S_{1} 	&= \left<\{T^{2}v_{1}, Tv_{1}, v_{1}\}\right>\\
+			&=\left<\left\{
+			\begin{bmatrix}
+			-2	\\
+			0	\\
+			-2	\\
+			0
+			\end{bmatrix}, 
+			\begin{bmatrix}
+			0	\\
+			-1	\\
+			0	\\
+			1
+			\end{bmatrix},
+			\begin{bmatrix}
+			0	\\
+			1	\\
+			1	\\
+			1
+			\end{bmatrix}\right\}\right>
+\end{align*}
+Luego por \textit{teorema}$(\ref{theo_nilpotentes})$, $\exists U_{1}\subset V = \mathbb{R}^{4\times 1}$ subspacio invariante por $T\diagup$
+$$\mathbb{R}^{4\times 1} = V = S_{1}\oplus U_{1}$$
+
+Por lo que $\dim U_{1} = 1$, asi $S_{2} = U_{1}$, con indice de nilpotencia $q_{2} = 1$.
+
+Hallando $v_{2}\in V\diagup T^{q2}v_{2} = 0$\\
+Resolviendo $Av = 0$, tenemos 
+$v = t
+\begin{bmatrix}
+1	\\
+0	\\
+1	\\
+0
+\end{bmatrix}
++ s
+\begin{bmatrix}
+0	\\
+1	\\
+0	\\
+1
+\end{bmatrix}$
+
+Tomando $v_{2} = 
+\begin{bmatrix}
+0\\
+1\\
+0\\
+1
+\end{bmatrix}$, pues 
+$\begin{bmatrix}
+1\\
+0\\
+1\\
+0
+\end{bmatrix}\in S_{1}$
+
+Finalmente $\beta = \left\{T^{2}v_{1}, Tv_{1}, v_{1}, v_{2}\right\}$ es una base para $V$ y 
+
+$$[T]_{\beta} = 
+\begin{bmatrix}
+	0	&	1	&	0	&	0\\
+	0	&	0	&	1	&	0\\
+	0	&	0	&	0	&	0\\
+	0	&	0	&	0	&	0
+\end{bmatrix}
+$$
+
+\section{Forma Canónica de Jordan (general)}
+\begin{mytheo}
+	sea $T:V\rightarrow V$ un operador lineal, $\dim V = n$. Entonces $\exists\;U, W\subset V$ subspacios invariantes por $T$/
+	\begin{enumerate}
+		\item $V = U\oplus W$
+		\item $T_{|U}:U\rightarrow U$ es nilpotente y $T_{|W}:W\rightarrow W$ es inversible.
+	\end{enumerate}
+\end{mytheo}
+\textbf{Demostración}\\
+\begin{itemize}
+	\item Casos triviales
+			\begin{itemize}
+				\item $T$ inversible, simplemente tomamos $W = V$ y $U=0$.
+				\item $T$ nilpotente, tomamos $W = 0$ y $U = V$.
+			\end{itemize}
+	\item Si $T$ no es inversible.
+		$$\Rightarrow N(T) \neq 0 \Rightarrow N(T^{p}) \neq 0,\quad p\in\mathbb{N}$$
+		Por otro lado se cumple:
+		\begin{align*}
+		& N(I)\subseteq N(T)\subseteq N(T^{2})\subseteq \ldots\subseteq N(T^{q})\subseteq N(T^{q+1}) \subseteq\ldots\subseteq V\\
+		& V \supseteq Im(I)\supseteq Im(T)\supseteq Im(T^{2})\supseteq\ldots\supseteq Im(T^{q})\supseteq Im(T^{q+1})\supseteq\ldots
+		\end{align*}
+		Sea $q\in\mathbb{N}$ el menor que cumple $N(T^{q}) = N(T^{q+1})$
+		
+		Sea afirma que 
+		\begin{equation}\label{nilp_index}
+		N(T^{q}) =  N(T^{q+k}),\quad\forall k\in\mathbb{N}
+		\end{equation}
+		Primero demostrando
+		$$N(T^{q+1}) = N(T^{q+2})$$
+		\begin{description}
+			\item[$(\subseteq)$] Directo
+			\item[$(\supseteq)$] Sea $u\in N(T^{q+2})$
+			\begin{align*}
+				T^{q+2}u &= 0\\
+				T^{q+1}(Tu) &= 0\\
+				Tu\in N(T^{q+1}) &= N(T^{q})\\
+				T^{q}(Tu) &= 0\\
+				T^{q+1}u &= 0\\
+				\Rightarrow u &\in N(T^{q+1})
+			\end{align*}
+		\end{description}
+		Probnado $(\ref{nilp_index})$ por inducción matemática.
+		\begin{itemize}
+			\item $k = 1$ Cumple
+			\item Suponiendo valido para k$\left(N\left(T^{q}\right) = N\left(T^{q+k}\right) \right)$
+			
+			\item Para $k+1$, debemos probar $N\left(T^{q}\right) = N\left(T^{q+k+1}\right)$
+				\begin{description}
+					\item[$(\subseteq)$] Directo
+					\item[$(\supseteq)$] Sea $u\in N\left(T^{q+k+1}\right)$
+						\begin{align*}
+							T^{q+k+1}u &= 0\\
+							T^{q+k}(Tu) &= 0\\
+							Tu \in N(T^{q+k}) & = N(T^{q})\\
+							T^{q}(Tu) & = T^{q+1} u= 0 \\
+							u \in N(T^{q+1}) &= N(T^{q})
+						\end{align*}
+				\end{description}
+		\end{itemize}
+\end{itemize}
+
+CONTINUA ...
+
 \end{document}
