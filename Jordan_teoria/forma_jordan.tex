@@ -142,7 +142,7 @@ Note que el bloque $\left[T_{|S_{k}}\right]_{\beta_{k}}$ es más grande (o igual
 Sea $T:V\rightarrow V, \dim V = n$, up operador lineal nilpotente de indice $q$, entonces:
 \begin{enumerate}
 	\item $\exists q_{1} = q, q_{2}, q_{3},\ldots, q_{r}\in\mathbb{N}\diagup\quad q_{1}\geq q_{2}\geq q_{3}\geq\ldots\geq q_{r}$
-	\item 
+	\item HERE SEE, WHAT HAPPEN WITH ALIGN ENVIROMENT
 	%\begin{align*}
 	%& \exists v_{1}, v_{2},\ldots, v_{r}\in V\diagup \\
 	%\beta & = \left\{ \\
@@ -313,7 +313,7 @@ $$
 				\Rightarrow u &\in N(T^{q+1})
 			\end{align*}
 		\end{description}
-		Probnado $(\ref{nilp_index})$ por inducción matemática.
+		Probando $(\ref{nilp_index})$ por inducción matemática.
 		\begin{itemize}
 			\item $k = 1$ Cumple
 			\item Suponiendo valido para k$\left(N\left(T^{q}\right) = N\left(T^{q+k}\right) \right)$
@@ -331,8 +331,89 @@ $$
 						\end{align*}
 				\end{description}
 		\end{itemize}
+		Ahora tomamos $U = N(T^{q})\wedge W = Im(T^{q}) = T^{q}V$
+		\begin{itemize}
+			\item $U$ invariante por $T$
+				$$T(U)\subseteq N(T^{q+1}) = N(T^{q}) = U$$
+			\item $W$ invariante por $T$
+				Sea $u\in W = T^{q}V$ 
+				\begin{align*}
+					& \Rightarrow\exists v\in V/ T^{q}v = u\\
+					& \Rightarrow Tu = T(T^{q}v) = T^{q}(Tu)\in T^{q}V = W
+				\end{align*}
+				$$\therefore T(W)\subseteq W$$				
+		\end{itemize}
+		Afirmamos que la suma $U+W$ es suma directa, pues si $v\in U\cap W$, entonces:
+		\begin{align*}
+			\Rightarrow v\in N(T^{q})\quad &\wedge\quad v\in T^{q}V = W\\
+			\Rightarrow	T^{q}v = 0\quad &\wedge\quad\exists w\in V/ v = T^{q}w\\
+			T^{2q}w & = T^{q}v = 0 \\
+			\Rightarrow w\in N(T^{2q}) & = N(T^{q})\\
+			\Rightarrow T^{q}w & = 0 = v 
+		\end{align*}
+		Por el teorema de la dimensión en $T^{q}:V\rightarrow V$, tenemos:
+		$$\dim V = \dim T^{q}V  + \dim N(T^{q}) = \dim (T^{q}V\oplus N(T^{q})) = \dim (U\oplus W)$$
+		
+		Por lo que $V = T^{q}V \oplus N(T^{q}) = U\oplus W$.
+		
+		Finalmente probemos que $T_{|U}:U\rightarrow U$ es nilpotente y $T_{|W}:W\rightarrow W$ es inverśible.
+		\begin{itemize}
+			\item $T_{|U}:U\rightarrow U$ nilpotente.
+			Como $q\in\mathbb{N}$, es el mínimo tal que $ N(T^{q}) = N(T^{q+1})$
+			
+			Entonces $N(T^{q-1}) \neq 0$, pues si $N(T^{q-1}) = 0$ implicaria que $N(T^{q}) = 0$. Para probar esto supongamos que $N(T^{q})\neq 0$.
+			$$\exists v\in N(T^{q}), v\neq 0/\quad T^{q}v = 0$$
+			\begin{align*}
+				T^{q-1}(Tv) &= 0\\
+				Tv \in N(T^{q-1}) &= \{0\}\\
+				Tv & = 0\\
+				v & \in N(T)\subseteq N(T^{q-1})\\
+				v &\in N(T^{q-1})
+			\end{align*}
+			Contradice que $N(T^{q-1}) = 0$, por lo que $N(T^{q}) = 0$
+			\begin{equation}\label{minimalidad_index}
+				\Rightarrow N(T^{q-1}) = N(T^{q})
+			\end{equation}
+			Pero $(\ref{minimalidad_index})$, contradice la minimalidad de $q\in\mathbb{N}$
+			$$\therefore N(T^{q-1})\neq 0$$
+			Así tenemos $T^{q} v = 0,\quad\forall v\in U\quad\wedge\quad\exists u\in U/\quad T^{q-1}u\neq 0$
+			$$\Rightarrow T_{|U}^{q-1}\neq 0\quad\wedge\quad T_{U}^{q} = 0$$
+			$\therefore T_{|U}$ es nilpotente de indice $q$.
+			
+			\item $T_{|W}:W\rightarrow W$ inversible.
+			Sea $v\in N(T_{|W})\subseteq W = T^{q}V$
+			\begin{align*}
+				\Rightarrow Tv &= 0\\
+				pero\; v &\in T^{q}(V)\\
+				\Rightarrow \exists u &\in V/\quad T^{q}u = v\\
+				T^{q+1}u &= 0\\
+				\Rightarrow u &\in N(T^{q+1}) = N(T^{q})\\
+				\Rightarrow T^{q}u &= 0 = v
+			\end{align*}
+			Por lo que $N(T_{|W}) = 0$, asi $T_{|W} $ es inversible.
+		\end{itemize}
 \end{itemize}
 
-CONTINUA ...
+
+\begin{mytheo}[Unicidad de la decomposicion de $T$]
+La descompocisión de $T$ es una nilpotente y en una inversible es única.	
+\end{mytheo}
+
+\textbf{Prueba(pendiente)}\\
+
+
+\begin{mytheo}[Forma Canónica de Jordan]
+	Sea $V$ un $\mathbb{C}$ espacio vectorial, $\dim V = n$, $T:V\rightarrow V$ un operador lineal y $\lambda_{1},\lambda_{2},\ldots,\lambda_{k}\in \wedge (T)$ y $n_{1}, n_{2},\ldots , n_{k}$ las multiplicidades algebraicas de los valores propios(respectivamenete), entonces:
+
+Existen subespacios $V_{1}, V_{2},\ldots, v_{k}$ invariantes por $T\;\left(T(V_{i})\subseteq V_{i}\right)/$
+\begin{enumerate}
+	\item	$V = V_{1}\oplus V_{2}\oplus\ldots\oplus V_{k}$
+	\item $\dim V_{i} n_{i},\quad i=1-k$
+	\item El operador $T-\lambda_{i}I:V_{i}\rightarrow V_{i}$ es nilpotenete, $i=1-k$.
+\end{enumerate}
+\end{mytheo}
+
+
+
 
 \end{document}
