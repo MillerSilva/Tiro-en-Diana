@@ -1,0 +1,137 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\newtheorem{mydef}{Definicion}[section]
+\newtheorem{mynote}{Nota}
+\newtheorem{mytheo}{Teorema}
+\newtheorem{myexamp}{Ejemplo}
+\newtheorem{mycorol}{Corolario}
+\title{Forma Canónica de Jordan}
+\begin{document}
+\maketitle
+
+\section{Forma Canónica de Jordan}
+
+\subsection{Forma Canónica de Jordan para Operadores Nilpotentes}
+\begin{mydef}[Operadores Lineales Nilpotentes]
+	El operador $T:V\rightarrow V$ es nilpotente si $T^{p} = 0$, para algun $p\in\mathbb{N}$.Además se dice que $k\in\mathbb{N}$, es el indide de nilpotencia de $T$ si:
+$$T^{k-1}\neq 0 \wedge T^{k} = 0$$
+
+\end{mydef}
+
+\begin{mytheo}\label{theo_nilpotentes}
+	Sea $T:V\rightarrow V$, $V$ un $\mathbb{C}$ espacio vectorial, $\dim V = n$, $T$ nilpotente de indice $q$.Luego para $v\in V/ T^{q-1}v\neq 0$, tenemos:
+	\begin{enumerate}
+		\item El conjunto $\{T^{q-1}v, T^{q-2}v,\ldots,Tv, v\}$ es LI.
+		\item S = $\left<\{T^{q-1}v, T^{q-2}v,\ldots,Tv, v\}\right>$ es invariante por $T$.
+		\item Existe un subespacio $U$ de $V$, invariante por $T/$
+		$$V = S\oplus U$$
+	\end{enumerate}
+\end{mytheo}
+
+\textbf{Prueba}
+\begin{enumerate}
+	\item \begin{equation}\label{li_equation}
+		a_{0}v + a_{1}Tv + a_{2}T^{v} + \ldots + a_{q-1}T^{q-1}v = 0
+	\end{equation}
+	\begin{align*}
+		\Rightarrow T^{q-1}\left(a_{0}v + a_{1}Tv + a_{2}T^{v} + \ldots + a_{q-1}T^{q-1}v\right) & = 0\\
+		a_{0}T^{q-1}v &= 0\\
+		a_{0} &= 0
+	\end{align*}
+	De $(\ref{li_equation})$
+	$$a_{1}Tv + a_{2}T^{v} + \ldots + a_{q-1}T^{q-1}v = 0$$
+	\begin{align*}
+		\Rightarrow T^{q-2}\left(a_{1}Tv + a_{2}T^{v} + \ldots + a_{q-1}T^{q-1}v\right) & = 0\\
+		a_{1}T^{q-1}v &= 0\\
+		a_{1} &= 0
+	\end{align*}
+	De forma similar , luego tenemos:
+		$$a_{0} = a_{1} = a_{2} = \ldots = a_{q-1} = 0$$
+		$$\therefore \{T^{q-1}v, T^{q-2}v,\ldots,Tv, v\},\quad son LI$$
+	\item Sea $ u\in S$
+		\begin{align*}
+			\Rightarrow u &= \sum_{k=0}^{q-1}a_{k}T^{k}v\\
+			\Rightarrow Tu &=  \sum_{k=0}^{q-1}a_{k}T^{k+1}v = \sum_{k=0}^{q-2}a_{k}T^{k+1}v\in S
+		\end{align*}
+		$$\therefore T(S)\subset S$$
+	\item VER
+\end{enumerate}
+
+\begin{mycorol}
+	Del teorema $(\ref{theo_nilpotentes})$
+	\begin{align*}
+		S &= \left<\{T^{q-1}v, T^{q-2}v,\ldots,Tv, v\}\right>\\
+		&\Rightarrow\dim (S) = q\\			
+	\end{align*}
+
+	Luego 
+	\begin{align*}
+		T(S) &= \left<\{T^{q-1}v, T^{q-2}v,\ldots,T^{2}v, Tv\}\right>\\
+		&\Rightarrow\dim T(S) = q-1\\\\
+		T^{2}(S) &= \left<\{T^{q-1}v, T^{q-2}v,\ldots,T^{3}v, T^{2}v\}\right>\\
+		&\Rightarrow\dim T^{2}(S) = q-2
+	\end{align*}
+	Inductivamente 
+	\begin{align*}
+		T^{r}(S) &= \left<\{T^{q-1}v, T^{q-2}v,\ldots,T^{r+1}v, T^{r}v\}\right>\\
+		&\Rightarrow\dim T^{r}(S) = q-r\\			
+	\end{align*}
+\end{mycorol}
+
+\begin{mynote}
+	Como $S = S_{1}$ es invariante por $T$, podemos definir el operador $T$ sobre $S_{1}$, es decir, $T:S_{1}\rightarrow S_{1}$ cuyo indice de nilpotencia es $q_{1} = q$.
+Del teorema $(\ref{theo_nilpotentes})$, $\beta_{1} = \{T^{q-1}v, T^{q-2}v,\ldots,Tv, v\}$ es base de $S_{1}$.
+Así 
+\begin{align*}
+	[T]_{\beta_{1}} &= 
+	\left[
+	\left[T\left(T^{q_{1}-1}v\right)\right], 
+	\left[T\left(T^{q_{1}-2}v\right)\right],
+	\left[T\left(T^{q_{1}-3}v\right)\right],
+	\ldots,
+	\left[T\left(Tv\right)\right],
+	\left[T\left(v\right)\right]	
+	\right]\\\\
+	[T]_{\beta_{1}} &= 
+	\begin{bmatrix}
+		0	&	1	&	0	&	0	&	\ldots	&	0\\
+		0	&	0	&	1	&	0	&	\ldots	&	0\\
+		0	&	0	&	0	&	1	&	\ldots	&	0\\
+		\vdots	&	\vdots	&	\vdots	&	\vdots	&	\ddots	&	\vdots\\
+		0	&	0	&	0	&	0	&	\ldots	&	1\\
+		0	&	0	&	0	&	0	&	\ldots	&	0\\
+	\end{bmatrix} = [T_{|S1}]_{\beta_{1}}
+\end{align*}
+Además como $U = U_{1}$ invariante por $T$, podemos definir $T$ sobre $U_{1}$, $T: U_{1}\rightarrow U_{1}$, y volver a aplicar el \textit{teorema}$(\ref{theo_nilpotentes})$, es decir existe $S_{2}$ y $U_{2}$ subespacios de $U_{1}$, invariantes por $T$/
+$$U_{1} = S_{2}\oplus U_{2}$$
+Repitiendo lo anterior pero con $S = S_{2},\exists u\in V/T^{q_{2}-1}u\neq 0$, donde $q_{2}$ es el indice de nilpotencia de $T_{|S} = T:S\rightarrow S$, asi:
+\begin{align*}
+	\beta_{2} &= \left\{T^{q_{2}-1}u, T^{q_{2}-2}u,\ldots,Tu, u\right\}\\
+	[T]_{\beta_{2}} = 
+	\begin{bmatrix}
+		0	&	1	&	0	&	0	&	\ldots	&	0\\
+		0	&	0	&	1	&	0	&	\ldots	&	0\\
+		0	&	0	&	0	&	1	&	\ldots	&	0\\
+		\vdots	&	\vdots	&	\vdots	&	\vdots	&	\ddots	&	\vdots\\
+		0	&	0	&	0	&	0	&	\ldots	&	1\\
+		0	&	0	&	0	&	0	&	\ldots	&	0\\
+	\end{bmatrix} = [T_{|S2}]_{\beta_{2}}
+\end{align*}
+Podemos continuar descomponiendo los $U_{k}$, por el teorema anterior, hasta obtener:
+$$V = S_{1}\oplus S_{2}\oplus \ldots \oplus S_{k}$$
+De esto $\beta = \bigcup_{i=1}^{k}\beta_{i}$ es base de $v$, donde $\beta_{i}$ es base de $S_{i}$.
+Además
+$$\begin{bmatrix}
+	\left[T_{|S_{1}}\right]_{\beta_{1}}	&	O	&	\ldots	&	O\\
+	O	&	\left[T_{|S_{2}}\right]_{\beta_{2}}	&	\ldots	&	O\\
+	\vdots	&	\vdots	& \ddots	& \vdots\\
+	O	&	O	&	\ldots	&	\left[T_{|S_{k}}\right]_{\beta_{k}}
+\end{bmatrix}$$
+\end{mynote}
+\end{document}
