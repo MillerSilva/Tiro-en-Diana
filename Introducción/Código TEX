@@ -1,0 +1,30 @@
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{tiro_en_diana}
+\author{ }
+\date{}
+
+
+\begin{document}
+\begin{raggedleft}
+  \textbf{Introducción}
+\end{raggedleft}
+
+
+\noindent
+En la Academia General Militar se lleva a cabo la preparación física y técnica de los alumnos o cadetes para la superación de sus respectivos planes de estudio. En donde se considera una enseñanza de manera competente mediante la ejemplaridad. Todo ello bajo la dirección del Departamento de Formación Física.\\
+
+\noindent Por parte de dicho departamento, la creación de hábitos deportivos en los cadetes es fundamental. Es decir, les presentan diferentes deportes militares (orientación, patrullas de tiro, pentatlón militar y concurso de patrullas) y se les inicia en equitación y la defensa personal militar.\\
+
+\noindent Ahora centrémonos solo en el deporte de tiro. Dicha práctica de tiro realizada por los cadetes, consiste en acertar a un objetivo utilizando algún proyectil.\\ Se hace llamar blanco de tiro (y de manera más general, blanco) al objeto que se desea alcanzar con el proyectil, cuando se hace fuego dirigiendo hacia él la puntería. Si se le «hiere», se dice que «se ha dado en el blanco» o «que se ha hecho blanco». \\
+
+\noindent El sitio del blanco, tocado por el proyectil, recibe el nombre de «impacto», o «punto de impacto».\\
+
+
+\noindent El blanco de tiro característico es un cuadrado de cartulina con anillos concéntricos que suelen ser de color rojo, negro y blanco. El objetivo de las prácticas de tiro al blanco es alcanzar con series de disparos el  centro que lleva un disco pintado de color negro, este recibe el nombre de diana y sirve para marcar de un modo bien visible el sitio adonde se debe dirigir la puntería.\\
+
+\noindent En este proyecto analizaremos la práctica de tiro de un cadete en particular, en consecuencia, las puntuaciones que obtiene durante una semana de entrenamiento, sosteniendo además que el puntaje del tiro en diana dependerá de la semana en que se realice dicha práctica.
+
+\end{document}
