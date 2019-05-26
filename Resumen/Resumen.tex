@@ -1,0 +1,107 @@
+\documentclass[10pt,a4paper]{article}
+%\usepackage[english,spanish]{babel}
+\usepackage{indentfirst}
+\usepackage{anysize} % Soporte para el comando \marginsize
+%\marginsize{1.5cm}{1.5cm}{0.5cm}{1cm}
+\marginsize{2,5cm}{1,8cm}{4cm}{1,7cm}
+\usepackage[psamsfonts]{amssymb}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{stackrel}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+%Color a las referencias
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+\usepackage[utf8]{inputenc} 
+
+\usepackage{multicol}
+\renewcommand{\thepage}{}
+\columnsep=7mm
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{definicion}{Definici\'on}[section]
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{prueba}{Prueba}[section]
+\newtheorem{prueba*}{Prueba}[section]
+\newtheorem{corolario}{Corolario}[section]
+\newtheorem{observacion}{Observaci\'on}[section]
+\newtheorem{lema}{Lema}[section]
+\newtheorem{ejemplo}{Ejemplo}[section]
+\newtheorem{solucion*}{Soluci\'on}[section]
+\newtheorem{algoritmo}{Algoritmo}[section]
+\newtheorem{proposicion}{Proposici\'on}[section]
+
+\linespread{1.4} \sloppy
+
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Lr}{\mathcal{L}}
+\newcommand{\fc}{\displaystyle\frac}
+\newcommand{\ds}{\displaystyle}
+
+\DeclareMathOperator{\Dom}{Dom}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\usepackage{url}
+\usepackage{hyperref}
+
+\begin{document}
+\begin{center}
+ {\Large \textbf{TIRO EN DIANA}}
+\end{center}
+\begin{center}
+ Gustavo Lozano$^{1}$, Miller Silva$^{2}$, Ayrton Coronado$^{3}$, Mirian Geronimo$^{4}$, Guillermo Borjas$^{5}$ \vskip5pt
+ {\it Facultad de Ciencias$^1$, Universidad Nacional de Ingenier\'{\i}a$^1$\\}\vskip5pt
+ Email: glozanoa@uni.pe$^{1}$, miller.silva.m@uni.pe$^{2}$, e-mail$^{3}$, e-mail$^{4}$, e-mail$^{5}$
+\end{center}
+%\maketitle 
+\vspace*{1cm}
+\begin{abstract}
+
+\noindent En la Academia General de Zaragoza se programa una actividad de tiro para los Caballeros Cadetes.
+Para cierto Caballero Cadete, se dispone de 12 dianas  y en cada diana realizará 12 disparos. Las puntuaciones de cada disparo se ordenan en una matriz $A \in \mathbb{R}^{12\times 12}$ (\textit{matriz de puntuación de la semana 1}). Suponiendo que \textit{la matriz de puntuación de la semana $n$ }esta dada por $A^n$ y la \textit{puntuación final de tiro de la semana $n$ }está dada por la norma de la matriz ($||A^n||_1 \mbox{ o } ||A^n||_\infty$), se desea hallar la puntuación final de tiro de la semana 10 usando ambas normas y concluir con qué norma sale más beneficiado el Caballero Cadete.
+
+La dificultad de este trabajo se centra en encontrar una expresión general para la potencia $n-$ésima de la matriz $A$, para esto vamos a usar la matriz de Jordan de $A$ ($J_A$) ya que se cumple $A^n=P^{-1}J^n_AP$, donde la potencia  $J^n_A$ es más fácil de hallar comparado a $A^n$. Para hallar la matriz de Jordan de $A$, usaremos la transformación de Householder.
+
+\end{abstract}
+
+\begin{quotation}
+	{\small
+		\noindent\textbf{Palabras Clave:} \\ 
+	Matriz de puntuación, Puntuación final , Matriz de Jordan, Transformación de Householder\\
+	}
+\end{quotation}
+
+\renewcommand{\abstractname}{Abstract}
+\begin{abstract}
+	\noindent In the Academia General de Zaragoza a shooting activity is scheduled
+	for the Cadet Knights. For a certain Cadet Knight, they have
+	12 targets and in each target will make 12 shots. The scores of each
+	shot are ordered in a matrix $A \in \mathbb{R}^{12\times 12}$  (\textit{scoring matrix of the
+		Week 1 }). Assuming that the \textit{score matrix of the week $n$ }is
+	given by $A^n$ and the \textit{final punctuation of the week n } is given by the
+	standard of the matrix ($||A^n||_1 \mbox{ or } ||A^n||_\infty$), we want to find the punctuation
+	end of shot of week 10 using both standards and conclude what standard
+	The Cadet Knight benefits more.
+	The difficulty of this work is focused on finding a general expression
+	for the $n-th$ power of matrix $A$, for this we are going to use the matrix
+	of Jordan from $A (J_A)$ since $A^n=P^{-1}J^n_AP$ is met, where the $J^n_A$ power is easier to find compared to $A$. To find the Jordan matrix of $A$,
+	we will use the Householder transformation.
+	
+\end{abstract}
+
+
+\begin{quotation}
+	{\small
+		\noindent \textbf{Keywords:} \\ 
+		Scoring matrix, Final punctuation , Jordan's matrix, Householder transformation\\
+	}
+\end{quotation}
+\end{document}
