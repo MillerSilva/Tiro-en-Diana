@@ -18,13 +18,13 @@
 
 \section{Forma Canónica de Jordan para Operadores Nilpotentes}
 \begin{mydef}[Operadores Lineales Nilpotentes]
-	El operador $T:V\rightarrow V$ es nilpotente si $T^{p} = 0$, para algun $p\in\mathbb{N}$.Además se dice que $k\in\mathbb{N}$, es el indide de nilpotencia de $T$ si:
+	El operador $T:V\rightarrow V$ es nilpotente si $T^{p} = 0$, para algún $p\in\mathbb{N}$. Además se dice que $k\in\mathbb{N}$, es el índice de nilpotencia de $T$ si:
 $$T^{k-1}\neq 0 \wedge T^{k} = 0$$
 
 \end{mydef}
 
 \begin{mytheo}\label{theo_nilpotentes}
-	Sea $T:V\rightarrow V$, $V$ un $\mathbb{C}$ espacio vectorial, $\dim V = n$, $T$ nilpotente de indice $q$.Luego para $v\in V/ T^{q-1}v\neq 0$, tenemos:
+	Sea $T:V\rightarrow V$, $V$ un $\mathbb{C}$ espacio vectorial, $\dim V = n$, $T$ nilpotente de índice $q$. Luego para $v\in V/ T^{q-1}v\neq 0$, tenemos:
 	\begin{enumerate}
 		\item El conjunto $\{T^{q-1}v, T^{q-2}v,\ldots,Tv, v\}$ es LI.
 		\item S = $\left<\{T^{q-1}v, T^{q-2}v,\ldots,Tv, v\}\right>$ es invariante por $T$.
@@ -50,9 +50,9 @@ $$T^{k-1}\neq 0 \wedge T^{k} = 0$$
 		a_{1}T^{q-1}v &= 0\\
 		a_{1} &= 0
 	\end{align*}
-	De forma similar , luego tenemos:
+	De forma similar tenemos:
 		$$a_{0} = a_{1} = a_{2} = \ldots = a_{q-1} = 0$$
-		$$\therefore \{T^{q-1}v, T^{q-2}v,\ldots,Tv, v\},\quad son LI$$
+		$$\therefore \{T^{q-1}v, T^{q-2}v,\ldots,Tv, v\},\quad son \:LI$$
 	\item Sea $ u\in S$
 		\begin{align*}
 			\Rightarrow u &= \sum_{k=0}^{q-1}a_{k}T^{k}v\\
@@ -111,20 +111,21 @@ Además como $U = U_{1}$ invariante por $T$, podemos definir $T$ sobre $U_{1}$, 
 $$U_{1} = S_{2}\oplus U_{2}$$
 Repitiendo lo anterior pero con $S = S_{2},\exists u\in V/T^{q_{2}-1}u\neq 0$, donde $q_{2}$ es el indice de nilpotencia de $T_{|S} = T:S\rightarrow S$, asi:
 \begin{align*}
-	\beta_{2} &= \left\{T^{q_{2}-1}u, T^{q_{2}-2}u,\ldots,Tu, u\right\}\\
-	[T]_{\beta_{2}} = 
-	\begin{bmatrix}
-		0	&	1	&	0	&	0	&	\ldots	&	0\\
-		0	&	0	&	1	&	0	&	\ldots	&	0\\
-		0	&	0	&	0	&	1	&	\ldots	&	0\\
-		\vdots	&	\vdots	&	\vdots	&	\vdots	&	\ddots	&	\vdots\\
-		0	&	0	&	0	&	0	&	\ldots	&	1\\
-		0	&	0	&	0	&	0	&	\ldots	&	0\\
-	\end{bmatrix} = [T_{|S2}]_{\beta_{2}}
+	\beta_{2} &= \left\{T^{q_{2}-1}u, T^{q_{2}-2}u,\ldots,Tu, u\right\}
 \end{align*}
+$$[T]_{\beta_{2}} = 
+\begin{bmatrix}
+	0	&	1	&	0	&	0	&	\ldots	&	0\\
+	0	&	0	&	1	&	0	&	\ldots	&	0\\
+	0	&	0	&	0	&	1	&	\ldots	&	0\\
+	\vdots	&	\vdots	&	\vdots	&	\vdots	&	\ddots	&	\vdots\\
+	0	&	0	&	0	&	0	&	\ldots	&	1\\
+	0	&	0	&	0	&	0	&	\ldots	&	0\\
+\end{bmatrix} = [T_{|S2}]_{\beta_{2}}$$
+$$$$
 Podemos continuar descomponiendo los $U_{k}$, por el teorema anterior, hasta obtener:
 $$V = S_{1}\oplus S_{2}\oplus \ldots \oplus S_{k}$$
-De esto $\beta = \bigcup_{i=1}^{k}\beta_{i}$ es base de $v$, donde $\beta_{i}$ es base de $S_{i}$.
+De esto $\beta = \bigcup_{i=1}^{k}\beta_{i}$ es base de $V$, donde $\beta_{i}$ es base de $S_{i}$.
 Además
 $$\begin{bmatrix}
 	\left[T_{|S_{1}}\right]_{\beta_{1}}	&	O	&	\ldots	&	O\\
@@ -139,7 +140,7 @@ Note que el bloque $\left[T_{|S_{k}}\right]_{\beta_{k}}$ es más grande (o igual
 
 
 \begin{mytheo}[Estructura de la matriz de un Operador Lineal]
-Sea $T:V\rightarrow V, \dim V = n$, up operador lineal nilpotente de indice $q$, entonces:
+Sea $T:V\rightarrow V, \:dim V = n$, un operador lineal nilpotente de índice $q$, entonces:
 \begin{enumerate}
 	\item $\exists q_{1} = q, q_{2}, q_{3},\ldots, q_{r}\in\mathbb{N}\diagup\quad q_{1}\geq q_{2}\geq q_{3}\geq\ldots\geq q_{r}$
 	\item HERE SEE, WHAT HAPPEN WITH ALIGN ENVIROMENT
@@ -153,7 +154,7 @@ Sea $T:V\rightarrow V, \dim V = n$, up operador lineal nilpotente de indice $q$,
 	%& T^{q_{r}-1} v_{r}, T^{q_{r}-2} v_{r}, \ldots, T v_{r}, v_{r}\right\}
 	%\end{align*}
 	\item
-	$$T_{q_{1}} v_{1} = T^{q_{2}}v_{2} = \ldots = T^{q_{r}}v_{r} = 0$$
+	$$T^{q_{1}} v_{1} = T^{q_{2}}v_{2} = \ldots = T^{q_{r}}v_{r} = 0$$
 \end{enumerate}
 \end{mytheo}
 
@@ -224,10 +225,10 @@ Asi \begin{align*}
 			1
 			\end{bmatrix}\right\}\right>
 \end{align*}
-Luego por \textit{teorema}$(\ref{theo_nilpotentes})$, $\exists U_{1}\subset V = \mathbb{R}^{4\times 1}$ subspacio invariante por $T\diagup$
+Luego por \textit{teorema}$\left(\ref{theo_nilpotentes}\right)$, $\exists U_{1}\subset V = \mathbb{R}^{4\times 1}$ subspacio invariante por $T\diagup$
 $$\mathbb{R}^{4\times 1} = V = S_{1}\oplus U_{1}$$
 
-Por lo que $\dim U_{1} = 1$, asi $S_{2} = U_{1}$, con indice de nilpotencia $q_{2} = 1$.
+Por lo que $\dim U_{1} = 1$, asi $S_{2} = U_{1}$, con índice de nilpotencia $q_{2} = 1$.
 
 Hallando $v_{2}\in V\diagup T^{q2}v_{2} = 0$\\
 Resolviendo $Av = 0$, tenemos 
@@ -283,11 +284,11 @@ $$
 \begin{itemize}
 	\item Casos triviales
 			\begin{itemize}
-				\item $T$ inversible, simplemente tomamos $W = V$ y $U=0$.
-				\item $T$ nilpotente, tomamos $W = 0$ y $U = V$.
+				\item $T$ inversible, simplemente tomamos $W = V$ y $U=\emptyset$.
+				\item $T$ nilpotente, tomamos $W = \emptyset$ y $U = V$.
 			\end{itemize}
 	\item Si $T$ no es inversible.
-		$$\Rightarrow N(T) \neq 0 \Rightarrow N(T^{p}) \neq 0,\quad p\in\mathbb{N}$$
+		$$\Rightarrow N(T) \neq \emptyset \Rightarrow N(T^{p}) \neq \emptyset,\quad p\in\mathbb{N}$$
 		Por otro lado se cumple:
 		\begin{align*}
 		& N(I)\subseteq N(T)\subseteq N(T^{2})\subseteq \ldots\subseteq N(T^{q})\subseteq N(T^{q+1}) \subseteq\ldots\subseteq V\\
@@ -295,7 +296,7 @@ $$
 		\end{align*}
 		Sea $q\in\mathbb{N}$ el menor que cumple $N(T^{q}) = N(T^{q+1})$
 		
-		Sea afirma que 
+		Se afirma que:
 		\begin{equation}\label{nilp_index}
 		N(T^{q}) =  N(T^{q+k}),\quad\forall k\in\mathbb{N}
 		\end{equation}
@@ -313,10 +314,10 @@ $$
 				\Rightarrow u &\in N(T^{q+1})
 			\end{align*}
 		\end{description}
-		Probando $(\ref{nilp_index})$ por inducción matemática.
+		Probando $\left(\ref{nilp_index}\right)$ por inducción matemática.
 		\begin{itemize}
 			\item $k = 1$ Cumple
-			\item Suponiendo valido para k$\left(N\left(T^{q}\right) = N\left(T^{q+k}\right) \right)$
+			\item Suponiendo válido para k $\left(N\left(T^{q}\right) = N\left(T^{q+k}\right) \right)$
 			
 			\item Para $k+1$, debemos probar $N\left(T^{q}\right) = N\left(T^{q+k+1}\right)$
 				\begin{description}
@@ -335,7 +336,7 @@ $$
 		\begin{itemize}
 			\item $U$ invariante por $T$
 				$$T(U)\subseteq N(T^{q+1}) = N(T^{q}) = U$$
-			\item $W$ invariante por $T$
+			\item $W$ invariante por $T$.
 				Sea $u\in W = T^{q}V$ 
 				\begin{align*}
 					& \Rightarrow\exists v\in V/ T^{q}v = u\\
@@ -356,13 +357,13 @@ $$
 		
 		Por lo que $V = T^{q}V \oplus N(T^{q}) = U\oplus W$.
 		
-		Finalmente probemos que $T_{|U}:U\rightarrow U$ es nilpotente y $T_{|W}:W\rightarrow W$ es inverśible.
+		Finalmente probemos que $T_{|U}:U\rightarrow U$ es nilpotente y $T_{|W}:W\rightarrow W$ es inversible.
 		\begin{itemize}
 			\item $T_{|U}:U\rightarrow U$ nilpotente.
 			Como $q\in\mathbb{N}$, es el mínimo tal que $ N(T^{q}) = N(T^{q+1})$
 			
-			Entonces $N(T^{q-1}) \neq 0$, pues si $N(T^{q-1}) = 0$ implicaria que $N(T^{q}) = 0$. Para probar esto supongamos que $N(T^{q})\neq 0$.
-			$$\exists v\in N(T^{q}), v\neq 0/\quad T^{q}v = 0$$
+			Entonces $N(T^{q-1}) \neq \emptyset$, pues si $N(T^{q-1}) = \emptyset$ implicaría que $N(T^{q}) = \emptyset$. Para probar esto supongamos que $N(T^{q})\neq \emptyset$.
+			$$\exists v\in N(T^{q}),\: v\neq 0/\quad T^{q}v = 0$$
 			\begin{align*}
 				T^{q-1}(Tv) &= 0\\
 				Tv \in N(T^{q-1}) &= \{0\}\\
@@ -370,15 +371,15 @@ $$
 				v & \in N(T)\subseteq N(T^{q-1})\\
 				v &\in N(T^{q-1})
 			\end{align*}
-			Contradice que $N(T^{q-1}) = 0$, por lo que $N(T^{q}) = 0$
+			Contradice que $N(T^{q-1}) = \emptyset$, por lo que $N(T^{q}) = \emptyset$
 			\begin{equation}\label{minimalidad_index}
 				\Rightarrow N(T^{q-1}) = N(T^{q})
 			\end{equation}
 			Pero $(\ref{minimalidad_index})$, contradice la minimalidad de $q\in\mathbb{N}$
-			$$\therefore N(T^{q-1})\neq 0$$
+			$$\therefore N(T^{q-1})\neq \emptyset$$
 			Así tenemos $T^{q} v = 0,\quad\forall v\in U\quad\wedge\quad\exists u\in U/\quad T^{q-1}u\neq 0$
 			$$\Rightarrow T_{|U}^{q-1}\neq 0\quad\wedge\quad T_{U}^{q} = 0$$
-			$\therefore T_{|U}$ es nilpotente de indice $q$.
+			$\therefore T_{|U}$ es nilpotente de índice $q$.
 			
 			\item $T_{|W}:W\rightarrow W$ inversible.
 			Sea $v\in N(T_{|W})\subseteq W = T^{q}V$
@@ -390,22 +391,22 @@ $$
 				\Rightarrow u &\in N(T^{q+1}) = N(T^{q})\\
 				\Rightarrow T^{q}u &= 0 = v
 			\end{align*}
-			Por lo que $N(T_{|W}) = 0$, asi $T_{|W} $ es inversible.
+			Por lo que $N(T_{|W}) = \emptyset$, asi $T_{|W} $ es inversible.
 		\end{itemize}
 \end{itemize}
 
 
-\begin{mytheo}[Unicidad de la decomposicion de $T$]
-La descompocisión de $T$ es una nilpotente y en una inversible es única.	
+\begin{mytheo}[Unicidad de la descomposición de $T$]
+La descompocisión de $T$ en una nilpotente y en una inversible es única.	
 \end{mytheo}
 
 \textbf{Prueba(pendiente)}\\
 
 
 \begin{mytheo}[Forma Canónica de Jordan]
-	Sea $V$ un $\mathbb{C}$ espacio vectorial, $\dim V = n$, $T:V\rightarrow V$ un operador lineal y $\lambda_{1},\lambda_{2},\ldots,\lambda_{k}\in \wedge (T)$ y $n_{1}, n_{2},\ldots , n_{k}$ las multiplicidades algebraicas de los valores propios(respectivamenete), entonces:
+	Sea $V$ un $\mathbb{C}$-espacio vectorial, $\dim V = n$, $T:V\rightarrow V$ un operador lineal y $\lambda_{1},\lambda_{2},\ldots,\lambda_{k}\in \wedge (T)$ y $n_{1}, n_{2},\ldots , n_{k}$ las multiplicidades algebráicas de los valores propios(respectivamenete), entonces:
 
-Existen subespacios $V_{1}, V_{2},\ldots, v_{k}$ invariantes por $T\;\left(T(V_{i})\subseteq V_{i}\right)/$
+Existen subespacios $V_{1}, V_{2},\ldots, V_{k}$ invariantes por $T\;\left(T(V_{i})\subseteq V_{i}\right)/$
 \begin{enumerate}
 	\item	$V = V_{1}\oplus V_{2}\oplus\ldots\oplus V_{k}$
 	\item $\dim V_{i} n_{i},\quad i=1-k$
