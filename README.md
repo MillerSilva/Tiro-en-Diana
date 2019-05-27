@@ -27,6 +27,7 @@ miller@Bobby:~$ git push -u origin master
 * **Numerical Analysis Mathematics of Scientific Computing, David Kincaid**, download it [here](https://b-ok.cc/book/3501252/9a6099)
 * **An Introduction to Numerical Analysis**, download it [here](https://b-ok.cc/book/445037/2b1177)
 * **Numerical Methods in Matrix Computations** download it [here](https://b-ok.cc/book/2465290/f9f609)
+* **Scientific Computing with Python 3** download it [here](https://b-ok.cc/book/2851389/0b0a11)
 
 ### Videos
 
