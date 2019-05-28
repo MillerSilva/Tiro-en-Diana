@@ -23,11 +23,15 @@ miller@Bobby:~$ git push -u origin master
 
 
 ### Libros de Lectura
-* **Classical and Modern Numerical Analysis**, download it [here](https://b-ok.cc/book/2529495/f086ec)
-* **Numerical Analysis Mathematics of Scientific Computing, David Kincaid**, download it [here](https://b-ok.cc/book/3501252/9a6099)
-* **An Introduction to Numerical Analysis**, download it [here](https://b-ok.cc/book/445037/2b1177)
-* **Numerical Methods in Matrix Computations** download it [here](https://b-ok.cc/book/2465290/f9f609)
-* **Scientific Computing with Python 3** download it [here](https://b-ok.cc/book/2851389/0b0a11)
+* Análisis Numérico
+  * **Classical and Modern Numerical Analysis**, download it [here](https://b-ok.cc/book/2529495/f086ec)
+  * **Numerical Analysis Mathematics of Scientific Computing, David Kincaid**, download it [here](https://b-ok.cc/book/3501252/9a6099)
+  * **An Introduction to Numerical Analysis**, download it [here](https://b-ok.cc/book/445037/2b1177)
+  * **Numerical Methods in Matrix Computations** download it [here](https://b-ok.cc/book/2465290/f9f609)
+
+* Python
+  * **Scientific Computing with Python 3** download it [here](https://b-ok.cc/book/2851389/0b0a11)
+  * Documentacion de clases, verlo [aquí](https://docs.python.org/3/tutorial/classes.html) 
 
 ### Videos
 
