@@ -65,43 +65,26 @@
 \vspace*{1cm}
 \begin{abstract}
 
-\noindent En la Academia General de Zaragoza se programa una actividad de tiro para los Caballeros Cadetes.
-Para cierto Caballero Cadete, se dispone de 12 dianas  y en cada diana realizará 12 disparos. Las puntuaciones de cada disparo se ordenan en una matriz $A \in \mathbb{R}^{12\times 12}$ (\textit{matriz de puntuación de la semana 1}). Suponiendo que \textit{la matriz de puntuación de la semana $n$ }esta dada por $A^n$ y la \textit{puntuación final de tiro de la semana $n$ }está dada por la norma de la matriz ($||A^n||_1 \mbox{ o } ||A^n||_\infty$), se desea hallar la puntuación final de tiro de la semana 10 usando ambas normas y concluir con qué norma sale más beneficiado el Caballero Cadete.
-
-La dificultad de este trabajo se centra en encontrar una expresión general para la potencia $n-$ésima de la matriz $A$, para esto vamos a usar la matriz de Jordan de $A$ ($J_A$) ya que se cumple $A^n=P^{-1}J^n_AP$, donde la potencia  $J^n_A$ es más fácil de hallar comparado a $A^n$. Para hallar la matriz de Jordan de $A$, usaremos la transformación de Householder.
-
+\noindent El estudio de las matrices es fundamental para todo aquel que desea sumergirse en el maravilloso mundo de las matemáticas, ya que las matrices se encuentran en áreas como el álgebra lineal y el análisis numérico. Las operaciones con matrices pueden resultar fáciles, como sumar o restar matrices, o muy trabajosas como multiplicar o hallar la inversa, todo dependiendo del orden de la matriz. Imaginemos que quisiéramos hallar la potencia diez de una matriz $A\in\mathbb{R}^{12\times 12} $, querer calcularlo directamente sería una cosa de locos; para estos casos los matemáticos recomiendan trabajar con una matriz diagonal que sea semejante a $A$ esto es $A=PDP^{-1}$ la cual verifica $A^n=PD^nP^{-1}$, donde hallar la $D^n$ resulta mucho más fácil que $A^n$. Con esto podríamos estar tranquilos pero ¿Qué pasa si la matriz no es semejante a ninguna matriz diagonal?, aún podemos guardar la calma ya que en este caso podemos usar la forma canónica de Jordan de la matriz $A$, con el que también se cumple que $A^n=PJ^nP^{-1}$. \textit{La matriz de Jordan} es una bonita herramienta matemática que nos ayuda a simplificar operaciones, para nuestra suerte ya sé conoce la forma general de potencia $n-$ésima de la matriz de Jordan, lo ``difícil'' ahora es saber cómo hallarlo; para hallarlo es necesario calcular los valores propios de $A$, esto lo podemos hacer usando herramientas del análisis numérico como \textit{el método potencia, potencia inversa y QR}. Este trabajo se centra en calcular la potencia $k-$ésima de una matriz $A$ (\textit{la matriz de puntuación}), para esto usaremos lo mencionado lineas arriba.
 \end{abstract}
 
 \begin{quotation}
 	{\small
 		\noindent\textbf{Palabras Clave:} \\ 
-	Matriz de puntuación, Puntuación final , Matriz de Jordan, Transformación de Householder\\
+	La matriz de Jordan, Método potencia , Método potencia inversa, Método QR, Matriz de puntuación \\
 	}
 \end{quotation}
 
 \renewcommand{\abstractname}{Abstract}
 \begin{abstract}
-	\noindent In the Academia General de Zaragoza a shooting activity is scheduled
-	for the Cadet Knights. For a certain Cadet Knight, they have
-	12 targets and in each target will make 12 shots. The scores of each
-	shot are ordered in a matrix $A \in \mathbb{R}^{12\times 12}$  (\textit{scoring matrix of the
-		Week 1 }). Assuming that the \textit{score matrix of the week $n$ }is
-	given by $A^n$ and the \textit{final punctuation of the week n } is given by the
-	standard of the matrix ($||A^n||_1 \mbox{ or } ||A^n||_\infty$), we want to find the punctuation
-	end of shot of week 10 using both standards and conclude what standard
-	The Cadet Knight benefits more.
-	The difficulty of this work is focused on finding a general expression
-	for the $n-th$ power of matrix $A$, for this we are going to use the matrix
-	of Jordan from $A (J_A)$ since $A^n=P^{-1}J^n_AP$ is met, where the $J^n_A$ power is easier to find compared to $A$. To find the Jordan matrix of $A$,
-	we will use the Householder transformation.
-	
+	\noindent The study of matrices is fundamental for anyone who wants to immerse themselves in the wonderful world of mathematics, since matrices are found in areas such as linear algebra and numerical analysis. Operations with matrices can be easy, such as adding or subtracting matrices, or very hard to multiply or find the inverse, all depending on the order of the matrix. Imagine that we would like to find the ten power of a matrix $A\in\mathbb{R}^{12\times 12} $, to want to calculate it directly would be a crazy thing; for these cases, mathematicians recommend working with a diagonal matrix that is similar to $A$ this is $A=PDP^{-1}$ which verifies $A^n=PD^nP^{-1}$ , where to find the $D^n$ it's much easier than $A^n$. With this we could be calm but ¿What happens if the matrix is not similar to any diagonal matrix? We can still keep calm because in this case we can use Jordan's canonical form of the matrix  $A$, with which it is also true that $A^n=PJ^nP^{-1}$. \textit{The matrix of Jordan} is a nice mathematical tool that helps us to simplify operations, for our luck we already know the general form of $n$-th power of the matrix of Jordan, the `` difficult '' now is to know how to find it; to find it, it is necessary to calculate the eigenvalues of $A$, this can be done using numerical analysis tools such as \textit{the power method, inverse power and QR}. This work focuses on calculating the k-th power of a matrix A (\textit{the scoring matrix}), for this we will use the aforementioned lines.
 \end{abstract}
 
 
 \begin{quotation}
 	{\small
 		\noindent \textbf{Keywords:} \\ 
-		Scoring matrix, Final punctuation , Jordan's matrix, Householder transformation\\
+		The matrix of Jordan, The power method , The inverse power method, The method QR, the scoring matrix \\
 	}
 \end{quotation}
 \end{document}
