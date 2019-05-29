@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.2.12)  29 MAY 2019 02:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.2.12)  29 MAY 2019 04:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -902,32 +902,47 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.381 \newpage
+l.377 \newpage
                [7]pdfTeX warning (ext4): destination with the same identifier (
 name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.400 \end{document}
-                     [8]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 400.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 400.
+l.418 	
+        [8]
+Overfull \hbox (5.72691pt too wide) detected at line 436
+\OML/cmm/m/it/12 A[] \OT1/cmr/m/n/12 = []
+ []
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.448 \newpage
+               [9]pdfTeX warning (ext4): destination with the same identifier (
+name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.467 \end{document}
+                     [10]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 467.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 467.
  (./Tiro_en_diana.aux
 LaTeX Info: Redefining \. on input line 23.
 LaTeX Info: Redefining \% on input line 23.
 LaTeX Info: Redefining \. on input line 24.
 LaTeX Info: Redefining \% on input line 24.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 400.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 400.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 467.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 467.
 Package rerunfilecheck Info: File `Tiro_en_diana.out' has not changed.
 (rerunfilecheck)             Checksum: E4293F284E8365DCB86A4E6B5A5B1499;390.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 400.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 467.
  ) 
 Here is how much of TeX's memory you used:
- 17947 strings out of 492616
- 330654 string characters out of 6134203
- 421471 words of memory out of 5000000
- 21473 multiletter control sequences out of 15000+600000
+ 17953 strings out of 492616
+ 330705 string characters out of 6134203
+ 425499 words of memory out of 5000000
+ 21475 multiletter control sequences out of 15000+600000
  12458 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,10n,81p,1697b,577s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -945,11 +960,12 @@ y10.pfb></opt/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></opt
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></opt/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></opt/texlive/texmf-dist/font
 s/type1/public/amsfonts/latxfont/lasy10.pfb></opt/texlive/texmf-dist/fonts/type
-1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Tiro_en_diana.pdf (8 pages, 762431 bytes).
+1/public/amsfonts/symbols/msam10.pfb></opt/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/symbols/msbm10.pfb>
+Output written on Tiro_en_diana.pdf (10 pages, 776378 bytes).
 PDF statistics:
- 178 PDF objects out of 1000 (max. 8388607)
- 131 compressed objects within 2 object streams
- 21 named destinations out of 1000 (max. 500000)
+ 194 PDF objects out of 1000 (max. 8388607)
+ 144 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 500000)
  162 words of extra memory for PDF output out of 10000 (max. 10000000)
 
