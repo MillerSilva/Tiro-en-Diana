@@ -52,16 +52,11 @@ def comparar(A,v):  #devuelve True si son l.i
      
         if A.shape[0]==1:
 
-            print(A,v)
             rango1=1
-
-           
-
             M1 = np.append(A,v,axis=0) 
-            print(M1)
+           
             rango2=rango_matrix(M1)
-            print(rango2)
-    
+           
         else:
             
             rango1=rango_matrix(A)
