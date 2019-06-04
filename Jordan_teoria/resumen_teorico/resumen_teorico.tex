@@ -118,7 +118,8 @@ $$
 0	&	0	&	0	&	1	&	0	&	\ldots	&	0\\
 0	&	0	&	0	&	0	&	1	&	\ldots	&	0\\
 \vdots	&	\vdots 	&	\vdots	&	\vdots	&	\vdots &	\ddots	&	\vdots\\
-0	&	0	&	0	&	0	&	1	&	\ldots	&	1
+0	&	0	&	0	&	0	&	0	&	\ldots	&	1\\
+0	&	0	&	0	&	0	&	0	&	\ldots	&	0
 \end{bmatrix}$$
 \end{mynote}
 
@@ -188,13 +189,34 @@ En $(\ref{eigenvalue_iter})$
 	
 	Sea $\wedge (A) = \{\lambda_{1},\lambda_{2},\ldots ,\lambda_{k}\}$ y $m_{1},m_{2}, \ldots , m_{k}\in\mathbb{N}$ mutiplicidades geométricas de $\lambda_{1},\lambda_{2},\ldots ,\lambda_{k}$ respectivamente(No necesariamente $V = V_{1}\oplus V_{2}\oplus V_{3}\oplus\ldots\oplus V_{k}, v_{i}$ espacio propio de $\lambda_{i}$).
 	
-	Sin perdida de la generalidad, sea:
+	Sin pérdida de la generalidad, sea:
 	$$\vert\lambda_{1}\vert > \vert\lambda_{2}\vert > \vert\lambda_{3}\vert > \ldots\vert\lambda_{k}\vert$$
 	
 	Ahora sea $q^{(0)}\in\left<\bigcup_{i=1}^{k}V_{i}\right>$
 	$$\Rightarrow\quad q^{(0)} = \sum_{i=1}^{m_{1}}c_{i}^{(1)}v_{i}^{(1)} + \sum_{r=1}^{k}\sum_{j=1}^{m_{r}}c_{j}^{(r)}v_{j}^{(r)}$$
-	donde $v_{j}^{(i)}$: vector j-esimo del espacio propio $v_{i}$
+	donde $v_{j}^{(i)}$: vector j-ésimo del espacio propio $v_{i}$.
+	Luego definimos la iteración:
+\begin{align*}
+	q^{(k+1)} &= \frac{1}{\phi_{k}}Aq^{(k)}, \quad \phi_{k} = \vert\vert Aq^{(k)} \vert\vert\\
+	&= \left(\prod_{j=1}^{k}\phi_{i}^{-1}\right)A^{k+1}q^{(0)}, \quad haciendo: \phi = \left(\prod_{j=1}^{k}\phi_{i}^{-1}\right)\\
+	&= \phi A^{k+1}\left(\sum_{i=1}^{m_{1}}c_{i}^{(1)}v_{i}^{(1)} + \sum_{r=1}^{k}\sum_{j=1}^{m_{r}}c_{j}^{(r)}v_{j}^{(r)}\right)\\
+	&= \phi \left(\sum_{i=1}^{m_{1}}c_{i}^{(1)}\lambda_{1}^{k+1}v_{i}^{(1)} + \sum_{r=1}^{k}\sum_{j=1}^{m_{r}}c_{j}^{(r)}\lambda_{r}^{k+1}v_{j}^{(r)}\right)\\
+	&= \phi\lambda_{1}^{k+1} \left(\sum_{i=1}^{m_{1}}c_{i}^{(1)}v_{i}^{(1)} + \sum_{r=1}^{k}\sum_{j=1}^{m_{r}}c_{j}^{(r)}\left(\frac{\lambda_{r}}{\lambda_{1}}\right)^{k+1}v_{j}^{(r)}\right) \: \ldots(**)
+\end{align*}
+	$$\Rightarrow \lim_{k\rightarrow\infty}q^{(k+1)} = \lim_{k\rightarrow\infty}\left(\prod_{i=1}^{k}\phi_{i}^{-1}\right)\lambda_{1}^{k+1}\lim_{k\rightarrow\infty}\left(\sum_{i=1}^{m_{1}}c_{(i)}^{1}v_{i}^{(1)} + \sum_{r=1}^{k}\sum_{j=1}^{m_{r}}c_{j}^{(r)}\left(\frac{\lambda_{r}}{\lambda_{1}}\right)^{k+1}v_{j}^{(r)}\right)$$
+	$$Haciendo: a = \lim_{k\rightarrow\infty}\left(\prod_{i=1}^{k}\phi_{i}^{-1}\right)\lambda_{1}^{k+1}, \quad \lim_{k\rightarrow\infty}q^{(k+1)} = a\sum_{i=1}^{m_{1}}c_{i}^{(1)}v_{i}^{(1)}$$
+	Siendo $\sum_{i=1}^{m_{1}}c_{i}^{(1)}v_{i}^{(1)}$ el vector propio asociado a $\lambda_{1}$.
 
+	Ahora vamos a construir una sucesión que converja al valor propio $\lambda_{1}$.
+
+	$$\mu^{(k+1)} = \frac{1}{\phi_{k}}\frac{\left(Aq^{(k)}\right)_{j}}{q_{j}^{(k)}} = \frac{q_{j}^{(k+1)}}{q_{j}^{(k)}}$$
+
+	De $(**)$:
+\begin{align*}
+	\mu^{(k+1)} &= \frac{\phi\lambda_{1}^{k+1}\left[\sum_{i=1}^{m_{1}}c_{i}^{(1)}v_{i}^{(1)} + \sum_{r=1}^{k}\sum_{j=1}^{m_{r}}c_{j}^{(r)}\left(\frac{\lambda_{r}}{\lambda_{1}}\right)^{k+1}v_{j}^{(r)}\right]}{\phi\lambda_{1}^{k}\left[\sum_{i=1}^{m_{1}}c_{i}^{(1)}v_{i}^{(1)} + \sum_{r=1}^{k}\sum_{j=1}^{m_{r}}c_{j}^{(r)}\left(\frac{\lambda_{r}}{\lambda_{1}}\right)^{r}v_{j}^{(r)}\right]}\\
+\end{align*}
+	
 
 \end{itemize}
+
 \end{document}

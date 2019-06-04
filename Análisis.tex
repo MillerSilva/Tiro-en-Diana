@@ -1,0 +1,92 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\newcommand{\ds}{\displaystyle}
+\newtheorem{myexamp}{Ejemplo}[section]
+\title{Análisis}
+\begin{document}
+
+\maketitle
+
+
+\begin{enumerate}
+	\item \label{item1} Construye una matriz que recoja los datos obtenidos en la prueba de tiro por el Caballero Cadete en estudio.
+		Matriz de puntuaciones semana 1
+		
+$$\begin{bmatrix}{c|c|c|c|c|c|c|c|c|c|c|c}
+	1	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0\\
+	0	&	s	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0\\
+	1	&	1	&	s	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0\\
+	0	&	0	&	0	&	1	&	-1	&	2	&	-1	&	0	&	0	&	0	&	0	&	0\\
+	0	&	0	&	0	&	0	&	1	&	0	&	0	&	0	&	0	&	0	&	0	&	0\\
+	0	&	0	&	0	&	0	&	0	&	-1	&	1	&	0	&	0	&	0	&	0	&	0\\
+	0	&	0	&	0	&	0	&	0	&	0	&	1	&	0	&	0	&	0	&	0	&	0\\
+	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	s	&	0	&	0	&	0\\
+	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	s	&	0	&	0\\
+	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	s	&	0\\
+	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	s\\
+	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1
+\end{bmatrix}$$
+	
+	\item Calcule una expresión general para la potencia k-ésima de la matriz de \ref{item1}
+%	$$	
+%	\begin{bmatrix}
+%	-\frac{-s+1}{s-1}	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0\\
+%	0	&	s^{k}	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0\\
+%	\frac{s^{k}}{s-1} - \frac{1}{s-1}	&	ks^{(k - 1)}	&	s^{k}	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0\\
+%	0	&	0	&	0	&	1	&	-k	&	-(-1)^{k} + 1	&	\frac{(-1)^{k}}{2} - 1/2	&	0	&	0	&	0	&	0	&	0\\
+%	0	&	0	&	0	&	0	&	1	&	0	&	0	&	0	&	0	&	0	&	0	&	0\\
+%	0	&	0	&	0	&	0	&	0	&	(-1)^{k}	&	\frac{-(-1)^{k}}{2} + 1/2	&	0	&	0	&	0	&	0	&	0\\
+%	0	&	0	&	0	&	0	&	0	&	0	&	1	&	0	&	0	&	0	&	0	&	0\\
+%	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	ks	&	\frac{ks^{2}(k - 1)}{2}	&	\frac{ks^{3}(k - 2)(k - 1)}{6}	&	\frac{ks^{4}(k - 3)(k - 2)(k - 1)}{24}\\
+%	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	ks	&	\frac{ks^{2}(k - 1)}{2}	&	\frac{s^{3}(k - 2)(k - 1)}{6}\\
+%	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	ks	&	\frac{ks^{2}(k - 1)}{2}\\
+%	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	ks\\
+%	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	
+%	\end{bmatrix}		
+%	$$
+	\item Suponiendo que la matriz de puntuación del Caballero Cadete en tiro la semana k se obtiene con la potencia k de la matriz obtenida en la primera práctica, calcule la matriz de puntuaciones obtenidas por dicho Caballero Cadete en la semana 10 de curso, sabiendo que la bonificación de diana en esa semana es 5 puntos.
+	
+	Matriz de puntuaciones de la semana  10.
+	$$
+	A^{10}\begin{bmatrix}
+1.0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0\\
+0	&	9765625.0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0\\
+2441406.0	&	19531250.0	&	9765625.0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0\\
+0	&	0	&	0	&	1.0	&	-10.0	&	0.e-125	&	 0.e-125	&	0	&	0	&	0	&	0	&	0\\
+0	&	0	&	0	&	0	&	1.0	&	0	&	0	&	0	&	0	&	0	&	0	&	0\\
+0	&	0	&	0	&	0	&	0	&	1.0	&	0.e-125	&	0	&	0	&	0	&	0	&	0\\
+0	&	0	&	0	&	0	&	0	&	0	&	1.0	&	0	&	0	&	0	&	0	&	0\\
+0	&	0	&	0	&	0	&	0	&	0	&	0	&	1.0	&	50.0	&	1125.0	&	15000.0	&	131250.0\\
+0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1.0	&	50.0	&	1125.0	&	15000.0\\
+0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1.0	&	50.0	&	1125.0\\
+0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1.0	&	50.0\\
+0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1.0
+\end{bmatrix}	
+	$$    
+	
+	
+	\item La puntuación final en tiro de una semana se obtiene calculando la norma de una matriz. Considerando que las normas utilizadas son $\Vert A\Vert_{\infty}$ y $\Vert A\Vert_{1}$ . Calcule la puntación final que obtendría el Caballero Cadete en estudio en la semana 10 del curso (bonificación diana 5 puntos) si se aplica cada una de las normas anteriores. ¿ Con que norma saldría beneficiado ?
+		\begin{itemize}
+			\item $\Vert A^{10}\Vert_{\infty} = 31738281.0000000$
+			\item $\Vert A^{10}\Vert_{1} = 29296875.0000000$
+		\end{itemize}
+		$\therefore$ EL Caballero Cadete se verá beneficiado si su puntuación se calcula con la norma del máximo $(\Vert .\Vert_{\infty})$
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+    
+\end{document}
