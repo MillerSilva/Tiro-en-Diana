@@ -13,7 +13,8 @@ Algoritmo que calcula la forma canonica de Jordan de una matrix
 ################################################################################################################################
 
 
-# probado(falta implementar en clase)
+# probado
+#implementado es la clase
 def householder_iterations(A, b, iterations):
     
     nrowA, ncolA = np.shape(A)
@@ -21,24 +22,28 @@ def householder_iterations(A, b, iterations):
     R = 1*A
 
     for j in range(iterations):
-        phi = sqrt(sum(R[j:nrowA, j]**2))*np.sign(R[j,j])
+        if np.allclose(R[j:, j], 0.0):
+            pass
+        else:
+            phi = sqrt(sum(R[j:nrowA, j]**2))*np.sign(R[j,j])
 
-        w = np.zeros((nrowA, 1))
-        w[j:nrowA, 0] = R[j:nrowA, j]
-        w[j,0] += phi
+            w = np.zeros((nrowA, 1))
+            w[j:nrowA, 0] = R[j:nrowA, j]
+            w[j,0] += phi
 
-        beta = 1/sum(w[j:nrowA]**2)
-        Hj = np.identity(nrowA) - 2*beta*np.dot(w, w.T)
-    
-        R = np.dot(Hj, R)
-        Qt = np.dot(Hj, Qt)
-        b = np.dot(Hj, b)
+            beta = 1/sum(w[j:nrowA]**2)
+            Hj = np.identity(nrowA) - 2*beta*np.dot(w, w.T)
+        
+            R = np.dot(Hj, R)
+            Qt = np.dot(Hj, Qt)
+            b = np.dot(Hj, b)
 
     Q = Qt.T
 
     return R, Q, b 
 
-# probado(falta implementar en clase)
+# probado
+#implementado es la clase
 def householder(A, b):
     """
     Transforma el sistema Ax=b --> (Qt)Ax = (Qt)b, donde (Qt)A = R, Qt: transpuesta de Q
@@ -54,7 +59,8 @@ def householder(A, b):
         
 
     
-# probado(falta implementar en clase)
+# probado
+# implementado en la clase
 def gauss_jordan(A):
     """
     Calcula la inversa de a matriz A
@@ -77,7 +83,8 @@ def gauss_jordan(A):
     else:
         print("La matriz es singular, elija otro metodo.")
 
-# probado(falta implementar en clase)
+# probado
+#implementado es la clase
 def rango_matrix(A):
     """
     Calcula es rango de una matriz A
@@ -94,14 +101,15 @@ def rango_matrix(A):
     return r
 
 
-# probado(falta implementar en clase)
+# probado
+#implementado en la clase
 def power_matrix(A, k):
     """
     Calcula la potencia de A elevado a la k
     """
     nrow = np.shape(A)[0]
     A0 = np.identity(nrow)    
-    for k in range(q):
+    for k in range(k):
         A0 = np.dot(A0, A)
     return A0
 
@@ -158,20 +166,22 @@ def busca_base(A, a, q):
     G = np.zeros((nrowA, nrowA-r))
     for k in range(r):
         # coef(i,k) = dr-i(k), r : rango de B0 = N(A-aI)^q
-        G[k,:] = - np.array([coeff(r-k,r+i, B0) for i in range(1, nrow-r+1)])/B0[k,k]
+        G[k,:] = - np.array([coeff(r-k,r+i, B0) for i in range(1, nrowA-r+1)])/B0[k,k]
     
     G[r:, :] = np.identity(nrowA-r)
     
     return vectores_li(G, r) # retorna solo los vectore li de {G1, G2, ..., Gn-r}, en una matriz
 
 
-"""
-retorna solo los vectores li del conjunto {G1, G2, ..., Gn-r}, donde Gi = G[:,i] 
-y r = rango(B0) = dim(<N((A-aI)^{q})>)
-"""  
+ 
 def vectores_li(G, r):
+    """
+    retorna solo los vectores li del conjunto {G1, G2, ..., Gn-r}, donde Gi = G[:,i] 
+    y r = rango(B0) = dim(<N((A-aI)^{q})>)
+    """ 
     # calcula en numero de vectores que son li de {G1, G2, ..., Gn-r}
     m = rango_matrix(G.T)
+    n = np.shape(G)[0]
     if m == n-r:
         return G # todos los vectores  {G1, G2, ..., Gn-r} son li
     else:
@@ -217,7 +227,7 @@ def busca_vector(A, a, q):
 
 # implementar la funcion como un metodo de la clase "forma_jordan"
 def canonica_jordan(A):
-    spectro = eigenvalues(A)    # implementar calculo de eigenvalues de A
+    #spectro = eigenvalues(A)    # implementar calculo de eigenvalues de A
     base_bloques_jordan = np.array([])  # Base de la forma canónica de jordan
     nilp = [] # indices de nilpotencia de los espacios
     jordan_bloques = np.array([]) # almacena los bloques de jordan
@@ -250,7 +260,7 @@ def canonica_jordan(A):
             if k != q:
                 BJ[k, k+1] = 1
 
-        jordan_bloques.append(J)
+        jordan_bloques.append(BJ)
         nilp.append(q)
         base_bloques_jordan = np.append(base_bloques_jordan, base_bloque)
 
@@ -275,7 +285,7 @@ def canonica_jordan(A):
     """
     
     # calculando P , inversa de invP
-    P = gauss_jordan(invP)
+    #P = gauss_jordan(invP)
 
     return JA, P, jordan_bloques, nilp
 
@@ -298,8 +308,6 @@ def power_jordan(A, k):
         invP: inversa de P
         invPJK: invP * JK
 
-        PROBLEM:
-        a: valor propio del bloque de jordan(no esta disponible)
     """
     JA, P, jordan_bloques, nilp = canonica_jordan(A)
     nrowA = np.shape(A)[0]
