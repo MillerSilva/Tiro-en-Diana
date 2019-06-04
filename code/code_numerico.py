@@ -225,19 +225,35 @@ def busca_vector(A, a, q):
                 return Sq[:,k]
 
 
+def spectro(A):
+    eig, *_ = sl.eig(A)
+    a = eig[0]
+    eig_dif = np.array([a]) # alamcena los valores propio distintos
+    while np.shape(eig)[0] != 0:
+        eig = eig[eig != a]
+        if np.shape(eig)[0] != 0:
+            a = eig[0]
+            eig_dif = np.append(eig_dif, a)
+
+    return eig_dif
+
+
+
+
+
+
 # implementar la funcion como un metodo de la clase "forma_jordan"
 def canonica_jordan(A):
-    #spectro = eigenvalues(A)    # implementar calculo de eigenvalues de A
     base_bloques_jordan = np.array([])  # Base de la forma canónica de jordan
     nilp = [] # indices de nilpotencia de los espacios
     jordan_bloques = np.array([]) # almacena los bloques de jordan
 
-    for a in spectro:
+    for a in spectro(A):
         q = 1
         Sq = busca_base(A, a, q)
         Sq1 = busca_base(A, a, q+1)
 
-        while equal_generate_space(Sq, Sq1):
+        while not equal_generate_space(Sq, Sq1):
             q += 1
             Sq = Sq1
             Sq1 = busca_base(A, a, q+1)
@@ -274,15 +290,14 @@ def canonica_jordan(A):
         JA[q0:q, q0:q] = jordan_bloques[k]
         q0 = q
 
-    """
-    NOTA: ver como acceder a la base (que esta en matrices)
 
     #Hallando la matriz de cambio de base (P)
     invP = np.zeros((nrowJ, nrowJ))
-    for k in range(nrowJ):
-        invP[:,k] = gamma(k)
-
-    """
+    m = 0   # indice para armar la matriz de cambio de base
+    for q, A in enumerate(zip(nilp, base_bloques_jordan)):
+        for k in range(q):
+            invP[:,m] = A[:,k]
+            m += 1
     
     # calculando P , inversa de invP
     #P = gauss_jordan(invP)
@@ -315,7 +330,7 @@ def power_jordan(A, k):
     m0 = 0 # inicializacion de indexador
     m = 0   # indice para indexar los bloques de jordan
 
-    for q, a in zip(nilp, eigenvalues(A)) :    ################### Implementar calculo de eigenvalues ##########################
+    for q, a in zip(nilp, spectro(A)) :    ################### Implementar calculo de eigenvalues ##########################
         F = np.array([factorial(k)/(factorial(j)*factorial(k-j))*a**k for j in range(q)])
         BJK = np.zeros((q,q))
         for j in range(q):
