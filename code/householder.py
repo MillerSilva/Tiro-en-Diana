@@ -59,7 +59,7 @@ def householder_iterations(A, b, iterations):
 
     Q = Qt.T
 
-    return R, Q, b 
+    return R, Q, b
 
 # probado(falta implementar en clase)
 def householder(A, b):

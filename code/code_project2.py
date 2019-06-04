@@ -1,6 +1,9 @@
 """
 Algoritmo que calcula la forma canonica de Jordan de una matrix
 """
+import numpy as np
+import scipy.linalg as sl
+from math import sqrt
 
 
 ################################################################################################################################
@@ -9,15 +12,16 @@ Algoritmo que calcula la forma canonica de Jordan de una matrix
 
 
 # probado(falta implementar en clase)
-def householder(A, b):
+def householder_iterations(A, b, iterations):
     """
     Transforma el sistema Ax=b --> (Qt)Ax = (Qt)b, donde (Qt)A = R, Qt: transpuesta de Q
     Ademas Qt = Hn Hn-1 ... H2 H1, donde Hi es la i-esima matriz de householder, que elimina la i-esima columna
     """
-    nrowA = np.shape(A)[0]
+    nrowA, ncolA = np.shape(A)
     Qt = np.identity(nrowA)
     R = 1*A
-    for j in range(nrowA-1):
+
+    for j in range(iterations):
         phi = sqrt(sum(R[j:nrowA, j]**2))*np.sign(R[j,j])
 
         w = np.zeros((nrowA, 1))
@@ -26,14 +30,30 @@ def householder(A, b):
 
         beta = 1/sum(w[j:nrowA]**2)
         Hj = np.identity(nrowA) - 2*beta*np.dot(w, w.T)
-    
+
         R = np.dot(Hj, R)
         Qt = np.dot(Hj, Qt)
         b = np.dot(Hj, b)
+
     Q = Qt.T
 
     return R, Q, b
-        
+
+
+# probado(falta implementar en clase)
+def householder(A, b):
+    """
+    Transforma el sistema Ax=b --> (Qt)Ax = (Qt)b, donde (Qt)A = R, Qt: transpuesta de Q
+    Ademas Qt = Hn Hn-1 ... H2 H1, donde Hi es la i-esima matriz de householder, que elimina la i-esima columna
+    """
+    nrowA, ncolA = np.shape(A)
+    if nrowA > ncolA:
+        R, Q, b = householder_iterations(A, b, ncolA)
+    else:
+        R, Q, b = householder_iterations(A, b, nrowA-1)
+
+    return R, Q, b
+
 
     
 # probado(falta implementar en clase)
@@ -55,9 +75,10 @@ def gauss_jordan(A):
             T = ident - np.dot(a, np.transpose(e))
             A = np.dot(T, A)
             invA = np.dot(T, invA)
-        return invA
+        return invA        
     else:
         print("La matriz es singular, elija otro metodo.")
+
 
 # probado(falta implementar en clase)
 def rango_matrix(A):
@@ -85,8 +106,8 @@ def power_matrix(A, k):
     A0 = np.identity(nrow)    
     for k in range(q):
         A0 = np.dot(A0, A)
+    
     return A0
-
 
 
 
@@ -110,7 +131,7 @@ def coeff(k, i, B0):
     if j == 0:
         return B0[r, k] # dr(k) = B0[r, k]
     else:
-        # calculando di(k) = dik 
+        # calculando di(k) = dik
         dik = B0[i,k]
         for k in range(j):
             dik -= (B0[i,i-k]/B0[i-k, i-k])*coeff(k, i-k, B0)
@@ -118,25 +139,21 @@ def coeff(k, i, B0):
     return dik
 
 
-
-
-
-
 """
 retorna solo los vectores li del conjunto {G1, G2, ..., Gn-r}, donde Gi = G[:,i] 
 y r = rango(B0) = dim(<N((A-aI)^{q})>)
 """  
-def vectores_li(G, r):
-    # calcula en numero de vectores que son li de {G1, G2, ..., Gn-r}
-    m = rango_matrix(G.T)
-    if m == n-r:
-        return G # todos los vectores  {G1, G2, ..., Gn-r} son li
-    else:
-        li = np.array([G[:,0]]).
-        for k in range(1, n-r):
-            ################### implementar v\in <li> #######################################
-            if G[:, k] in <li>:
-                np.append(li, G[:,k])
+# def vectores_li(G, r):
+#     # calcula en numero de vectores que son li de {G1, G2, ..., Gn-r}
+#     m = rango_matrix(G.T)
+#     if m == n-r:
+#         return G # todos los vectores  {G1, G2, ..., Gn-r} son li
+#     else:
+#         li = np.array([G[:,0]])
+#         for k in range(1, n-r):
+#             ################### implementar v\in <li> #######################################
+#             if G[:, k] in <li>:
+#                 np.append(li, G[:,k])
 
         ####################### retornar li en una matriz ###################################3
 
@@ -168,8 +185,7 @@ def busca_base(A, a, q):
     
     return vectores_li(G, r) # retorna solo los vectore li de {G1, G2, ..., Gn-r}, en una matriz
 
-    
-    
+
 # verifica si en espacio generado por Sq es igual al espacion generado por Sq1 
 # Como Sq y Sq1 son generada por la funcion "busca_base", esta son matricez y los vectores son sus columnas
 def equal_generate_space(Sq, Sq1):
@@ -177,13 +193,11 @@ def equal_generate_space(Sq, Sq1):
     dim = np.shape(Sq)[1] # dim: numero de comlumnas de Sq, es decir # de vectores 
     for k in range(dim):
         # nota: A.T == np.transpose(A)
-        if rango_matrix(Sq1) > rango_matrix(np.concatenate((sq1,Sq[:,k].T), axis=1):
-            return else
+        if rango_matrix(Sq1) > rango_matrix(np.concatenate(sq1,Sq[:,k].T), axis=1):
+            return False
     return True
 
-    
-    
-    
+
 def busca_vector(A, a, p):
     """
     Busca v tal que (A-aI)^{p}v = 0 and (A-aI)^{p-1}v != 0    
@@ -354,3 +368,12 @@ def deflation(A):
     return C
 
 """
+
+def M_eigvals_temp(A):
+	ev = sl.eigval(A)
+	img = np.imag(ev)
+	if np.allclose(img, 0.0) == True:
+		return np.real(ev)
+	else:
+		return ev
+		
