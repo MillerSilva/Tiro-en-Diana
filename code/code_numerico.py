@@ -141,7 +141,7 @@ def coeff(i, k, B0):
         # calculando di(k) = dr-ik 
         coeffik = B0[r-i,k]
         for j in range(i):
-            coeffik -= (B0[r-i,r-i-j]/B0[r-i-j, r-i-j])*coeff(i+j, k, B0)
+            coeffik -= (B0[r-i,r-i+j]/B0[r-i-j, r-i+j])*coeff(i-j, k, B0)
 
     return coeffik
 
