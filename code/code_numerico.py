@@ -306,10 +306,14 @@ def canonica_jordan(A):
 
 
 
-"""
-NOTA: Falta la implementacion del calculo de eigenvalues
-"""
-     
+# Calcula la combinatoria de "m" en "n"
+def combinatoria(m,n):
+    if m < n:
+        return 0
+    else:
+        return factorial(m)/(factorial(n)*factorial(m-n))
+
+
 def power_jordan(A, k):
     
     """
@@ -330,18 +334,24 @@ def power_jordan(A, k):
     m0 = 0 # inicializacion de indexador
     m = 0   # indice para indexar los bloques de jordan
 
-    for q, a in zip(nilp, spectro(A)) :    ################### Implementar calculo de eigenvalues ##########################
-        F = np.array([factorial(k)/(factorial(j)*factorial(k-j))*a**k for j in range(q)])
+    ##################################### Codigo comprobado #####################################
+    for q, a in zip(nilp, spectro(A)): 
+        F = np.array([combinatoria(k, j)*a**(k-j) for j in range(q)])
         BJK = np.zeros((q,q))
         for j in range(q):
-            BJK[j, j:] = F[1:q-j+1]
+            if j == 0:
+                BJK[j,j:] = F
+            else:
+                BJK[j, j:] = F[1:q-j]
+
+    #############################################################################################
         m += q
         JAK[m0:m, m0:m] = BJK
         m0 = m
 
     invP = gauss_jordan(P)
-    invP_JK = np.dot(invP, JAK)
-    AK = np.dot(invP_JK, P)
+    invP_JAK = np.dot(invP, JAK)
+    AK = np.dot(invP_JAK, P)
 
     return AK
 
