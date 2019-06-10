@@ -70,7 +70,7 @@
 \vspace*{1cm}
 \begin{abstract}
 
-\noindent El estudio de las matrices es fundamental para todo aquel que desea sumergirse en el maravilloso mundo de las matemáticas. Las matrices son parte escencial de ésta y son ampliamente usadas en diversas áreas como lo es en el álgebra lineal, el análisis numérico y las probabilidades. Por ejemplo, para modelar el comportamiento de la propagación de un virus ``T'', se usa la potenciación de matrices; supongamos que tenemos una población de personas sanas ($S$) e infectadas ($I$) donde las personas sanas tienen un $80\%$ de probabilidad de no infectarse en 2 días, y que además hay una cura con $1\%$ de efectividad, estos datos se ordenan en una matriz $A$. Luego si empezamos con una población de 99 personas sanas y 1 infectado, dentro de 2 días tedríamos que la nueva población es : 
+\noindent El estudio de las matrices es fundamental para todo aquel que desea sumergirse en el maravilloso mundo de las matemáticas. Las matrices son parte escencial de ésta y son ampliamente usadas en diversas áreas como lo es en el álgebra lineal, el análisis numérico y las probabilidades. Por ejemplo, para modelar el comportamiento de la propagación de un virus ``T'', se usa la potenciación de matrices; supongamos que tenemos una población de personas sanas ($S$) e infectadas ($I$) donde las personas sanas tienen un $80\%$ de probabilidad de no infectarse en 2 días, y que además hay una cura con $1\%$ de efectividad, estos datos se ordenan en una matriz $A$. Luego si empezamos con una población de 99 personas sanas y 1 infectado, dentro de 2 días tedríamos que la nueva población es: 
 \begin{equation*}
 \begin{pmatrix} S\\I \end{pmatrix}_2 
 =
@@ -79,7 +79,7 @@
 =
 \begin{pmatrix} 79.21 \\ 20.79 \end{pmatrix}_2, 
 \end{equation*}
-es decir que aproximadamente tendríamos 79 personas sanas y 21 infectadas; y ¿qué pasaría en $2n$ días?, bueno tendríamos que la población sería $A^nX_0$. Es aquí donde las cosas se complican un poquito, pero podemos usar una maravillosa herramienta matemática que nos ayudará a simplificar los cálculos, estamos hablando de la matriz de Jordan, la cual satisface $A^n=PJ^nP^{-1}$, así tendríamos que:
+es decir que aproximadamente tendríamos 79 personas sanas y 21 infectadas; y ¿qué pasaría en $2n$ días?, bueno tendríamos que la población sería $A^nX_0$. Es aquí donde comienzan las complicaciones, dado que elevar una matriz a su n-ésima potencia no es tarea fácil, sin embargo existe una maravillosa herramienta matemática que nos ayudará a simplificar los cálculos; nos referimos a la matriz de Jordan. La matriz de Jordan satisface $A^n=PJ^nP^{-1}$, lo cual aplicando esto a nuestro problema anterior tendríamos que:
 \begin{equation*}
 A^n=
 \begin{pmatrix} 0.8 & 0.01\\0.2&0.99 \end{pmatrix}^n
@@ -88,7 +88,7 @@ A^n=
 \begin{pmatrix} 1&0\\ 0 &0.79  \end{pmatrix}^n
 \begin{pmatrix} -0.05&-0.71\\ -1.00 &0.71 \end{pmatrix}^{-1}
 \end{equation*}
-ahora si $n$ es muy grande tenemos:
+ahora si $n$ es muy grande obtenemos:
 \begin{equation*}
 \begin{pmatrix} 1&0\\ 0 &0.79  \end{pmatrix}^n
 \rightarrow
@@ -104,11 +104,11 @@ finalmente cuando $n\to\infty$ la población esperada es:
 \begin{pmatrix} 99\\1 \end{pmatrix}
 =\begin{pmatrix} 4.76\\95.24 \end{pmatrix},
 \end{equation*}
-esto es, 5 personas sanas y 95 infectadas; increible verdad.
+esto es, 5 personas sanas y 95 infectadas; ¿increíble verdad?.
 
-Vemos así que \textit{la matriz de Jordan} es muy útil para simplificar operaciones; el desafio es hallarla; para esto es necesario calcular los valores propios de $A$, esto lo podemos hacer usando herramientas del análisis numérico como \textit{el método potencia, potencia inversa y QR}. Para nuestra suerte ya se conoce la forma general de la potencia  $n-$ésima de la matriz de Jordan.
+Vemos así que \textit{la matriz de Jordan} es muy útil para simplificar operaciones; el desafío es hallarla; para esto es necesario calcular los valores propios de $A$, los cuales podemos obtener usando algunos métodos del análisis numérico tales como \textit{el método potencia, potencia inversa y QR}. Para nuestra suerte ya se conoce la forma general de la potencia  $n-$ésima de la matriz de Jordan.
 
-Este trabajo se centra en calcular la potencia $k-$ésima de una matriz $A\in\R^{12\times 12}$ (\textit{la matriz de puntuación}), la cual contiene puntuaciones de una prueba de tiro en dianas de un cadete, para esto usaremos la matriz de Jordan y los métodos numéricos, mencionados lineas arriba, para calcular los valores propios.
+Este trabajo se centra en calcular la potencia $k-$ésima de una matriz $A\in\R^{12\times 12}$ (\textit{la matriz de puntuación}), la cual contiene puntuaciones de una prueba de tiro en dianas realizados por un cadete, para esto calcularemos su matriz de Jordan asociada, ayudándonos de los métodos numéricos ya mencionados y algunos otros algoritmos de apoyo para calcular los valores propios y los bloques de Jordan.
 \end{abstract}
 
 \begin{quotation}
