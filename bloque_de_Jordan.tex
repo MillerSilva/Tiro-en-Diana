@@ -1,0 +1,19 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, botton=2.00cm]{geometry}
+
+\begin{document}
+La potencia k-ésima del bloque de Jordan $J_{m}(\lambda) \in \mathbb{C}^{m\times m}$ está dada por:\\
+$$(J_{m}(\lambda))^{k}= \left(\begin{array}{c c c c c}
+    \lambda^{k} & {k \choose 1}\lambda^{k-1}   & {k \choose 2}\lambda^{k-2} & \dots       & {k \choose m-1}\lambda^{k-m+1}\\
+                  & \lambda^{k}                &  {k \choose 1}\lambda^{k-1} & \dots       & {k \choose m-2}\lambda^{k-m+2}\\
+                  &                            &  \lambda^{k}                & 	\ddots     &  \vdots\\
+                  &                            &                             & 	\ddots     & {k \choose 1}\lambda^{k-1}\\
+                  &                            &                             &             & \lambda^{k}
+\end{array}\right)$$
+
+$(k\geq m).\ Si \ |\lambda| < 1, \ luego \ \lim_{k\rightarrow\infty}(J_{m}(\lambda))^{k} = 0$
+\end{document}
