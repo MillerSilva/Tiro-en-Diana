@@ -14,6 +14,12 @@
 \usepackage{verbatim}
 
 
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{url}
+\usepackage{hyperref}
+
+
+
 \usepackage[colorinlistoftodos]{todonotes}
 %Color a las referencias
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
@@ -120,9 +126,54 @@ Este trabajo se centra en calcular la potencia $k-$ésima de una matriz $A\in\R^
 
 \renewcommand{\abstractname}{Abstract}
 \begin{abstract}
-	\noindent The study of matrices is fundamental for anyone who wants to immerse themselves in the wonderful world of mathematics, since matrices are found in areas such as linear algebra and numerical analysis. Operations with matrices can be easy, such as adding or subtracting matrices, or very hard to multiply or find the inverse, all depending on the order of the matrix. Imagine that we would like to find the ten power of a matrix $A\in\mathbb{R}^{12\times 12} $, to want to calculate it directly would be a crazy thing; for these cases, mathematicians recommend working with a diagonal matrix that is similar to $A$ this is $A=PDP^{-1}$ which verifies $A^n=PD^nP^{-1}$ , where to find the $D^n$ it's much easier than $A^n$. With this we could be calm but ¿What happens if the matrix is not similar to any diagonal matrix? We can still keep calm because in this case we can use Jordan's canonical form of the matrix  $A$, with which it is also true that $A^n=PJ^nP^{-1}$. \textit{The matrix of Jordan} is a nice mathematical tool that helps us to simplify operations, for our luck we already know the general form of $n$-th power of the matrix of Jordan, the `` difficult '' now is to know how to find it; to find it, it is necessary to calculate the eigenvalues of $A$, this can be done using numerical analysis tools such as \textit{the power method, inverse power and QR}. This work focuses on calculating the k-th power of a matrix A (\textit{the scoring matrix}), for this we will use the aforementioned lines.
+	\noindent The study of matrices is fundamental for those who wish to immerse themselves in the wonderful world of mathematics, since matrices are in areas such as Linear Algebra, Numerical Analysis and Probabilities. For example to model the behavior of virus propagation T, it use matrices potentiation, suppose we have a population healthy($S$) and infected$(I)$, with an $80\%$ chance that healthy people will not become infected in two days, and also there is a cure with $1\%$ effectiveness, hese data are ordered in a matrix $A$. Then if we have a population of 99 healthy persons and 1 infected person, 2 days later we would have that the new population is:
+	$$
+	\begin{pmatrix} S\\I \end{pmatrix}_2 
+	=
+	\begin{pmatrix} 0.8 & 0.01\\0.2&0.99 \end{pmatrix} 
+	\begin{pmatrix} 99\\ 1 \end{pmatrix}_0
+	=
+	\begin{pmatrix} 79.21 \\ 20.79 \end{pmatrix}_2, 
+	$$
+	this is approximately we would have 79 healthy persons and 21 infected persons, and ¿What would happen with the population in 2 days?, well the population would be $A^{n}X_{0}$. It's here where
+	things get complicated, but we can use a wonderful mathematical tool  that would help us simplify the calculations, we are talking about the matrix of Jordan, which satisfies $A^{n}=PJ^{n}P^{-1}$, so we would have:\\
+	\begin{equation*}
+	A^n=
+	\begin{pmatrix} 0.8 & 0.01\\0.2&0.99 \end{pmatrix}^n
+	=
+	\begin{pmatrix} -0.05&-0.71\\ -1.00 &0.71 \end{pmatrix}
+	\begin{pmatrix} 1&0\\ 0 &0.79  \end{pmatrix}^n
+	\begin{pmatrix} -0.05&-0.71\\ -1.00 &0.71 \end{pmatrix}^{-1}
+	\end{equation*}
+	Now, if $n$ is a very large number, we would have:\\
+	$$
+	\begin{pmatrix} 1&0\\ 0 &0.79  \end{pmatrix}^n
+	\rightarrow
+	\begin{pmatrix} 1&0\\ 0 &0 \end{pmatrix}
+	\Rightarrow
+	A^n\rightarrow \begin{pmatrix} 0.05&0.05\\ 0.95 &0.95 \end{pmatrix}
+	$$
+	Finally, when $n\to\infty$ the expected population is:\\
+	$$
+	\begin{pmatrix} S\\I \end{pmatrix}_\infty
+	=
+	\begin{pmatrix} 0.05&0.05\\ 0.95 &0.95 \end{pmatrix}
+	\begin{pmatrix} 99\\1 \end{pmatrix}
+	=\begin{pmatrix} 4.76\\95.24 \end{pmatrix},
+	$$
+	this is 5 healthy persons and 95 persons infected. That's incredible, right?!
+	
+	\noindent So, we see that \textit{Jordan matrix} is very useful to simplify operations; the ``complication''
+	is to find it; for this it's necessary to calculate the eigenvalues of $A$, this we can do
+	using numerical analysis tools such as \textit{the power method, inverse power and
+		QR}. For our luck we already know the general form of $J^{n}$, with $J$:
+	Jordan matrix.
+	
+	\noindent This work focuses on calculating the power $k$ of a matrix $A \in \mathbb{R}^{12\times12}$
+	(\textit{the scoring matrix}), where $A$ contains  the scores of the shooting test of a
+	cadet, for this we will use the Jordan Form and the numerical methods, indicated
+	lines above, to calculate the eigenvalues and blocks' Jordan.
 \end{abstract}
-
 
 \begin{quotation}
 	{\small
@@ -230,14 +281,14 @@ Existen subespacios $V_{1}, V_{2},\ldots, V_{k}$ invariantes por $T\;\left(T(V_{
 \end{enumerate}
 \end{mytheo}
 \noindent Ahora introduciremos algunos métodos numéricos que nos permiten calcular los valores y vectores  propios de una matriz, los cuales son necesarios para construir la forma canónica de Jordan de una matriz.
-\subsection{Método potencia}
+\subsection{Métodos para calcular valores propios}
+\subsubsection{Método potencia}
 \noindent Dada una matriz $A\in \mathbb{R}^{n\times n}$, este método calcula el mayor valor propio de $A$ y el vector propio asociado a este valor propio, mediante iteraciones.
 Es decir, dada la siguiente relación de recurrencia :\begin{equation*}
     q^{(k+1)} = \frac{1}{\phi_{k}}Aq^{(k)},\quad donde\;\phi_{k} = \Vert Aq^{(k)}\Vert    
 \end{equation*} e inicializando con algún vector $q^{(0)}$, al realizar las iteraciones la sucesión converge al autovector asociado al mayor valor propio.
 
-
-\subsubsection{Convergencia del Método Potencia}
+\noindent\textit{\textbf{Convergencia del Método Potencia}}
 \begin{itemize}
 \item Caso general:\\
 Sea $\wedge(A)=\{\lambda_{1},\ldots,\lambda_{k}\}$ el esprectro de $A$ y $m_{1}, \ldots , m_{k}\in\mathbb{N}$ multiplicidades geométricas de $\lambda_{1},\lambda_{2},\ldots ,\lambda_{k}$ respectivamente (no necesariamente\\ $V=V_{1}\oplus V_{2}\oplus V_{3}\oplus\ldots\oplus V_{k},\ V_{i}$ espacio propio de $\lambda_{i}$).
@@ -260,7 +311,7 @@ donde $(Aq^{(k)})_{j}$ es el j-ésimo elemento de $Aq^{(k)}$ y $q^{(k)}_{j}$ es 
 Así las ecuaciones (1) y (2) nos servirán para hallar el vector propio y su respectivo valor propio siendo este el máximo.
 
 
-\subsection{Deflacción}
+\noindent\textbf{\textit{Deflacción}}\\
 \noindent Luego que se ha obtenido $\lambda_{1}$ el autovalor máximo y $x_{1}$ su autovector propio asociado mediante el método de la potencia de una matriz $A^{n\times n}$, utilizaremos la deflacción para hallar una matriz más simple que tenga los mismos autovalores que $A$ sin contar el autovalor ya calculado, es decir, el $\lambda_{1}$. Como esta matriz tendrá los mismos autovalores de $A$ ( sin el $\lambda_{1}$), podemos aplicarle el método de la potencia para hallar el siguiente autovalor ($\lambda_{2}$) y luego volver a aplicar la deflación para hallar una matriz más simple que contenga los mismos autovalores de $A$ pero sin $\lambda_{1}$ y $\lambda_{2}$, con el método de la potencia obtenemos otro autovalor $\lambda_{3}$ y así recursivamente encontramos todos los autovalores de $A$.
 Esto sigue el siguiente esquema:\\
 Sea $x$ un autovector de $A$ y $\lambda $ su correspondiente autovalor y sea $U$ una matriz $n\times(n-1)$ tal que $(x,U)$ sea unitario, ya que $Ax=\lambda x$ y $A(x,A)=(Ax,AU)$, tenemos$$(x,U)^{H}A(x,U)=\left(\begin{array}{c}
@@ -280,78 +331,181 @@ Ahora, para determinar $U$ usamos las transformaciones de Householder.\\
 \noindent\textbf{Propiedad}\\
 \noindent Si $x \in\mathbb{R}^n, \ x_{1}$ su primera componente, $x\neq0$, $ \sigma=sign(x_{1})\|x\|_{2}$ donde $sign(0)=+1$, y si $w=x+\sigma e^{(1)} \ y \ \theta=\frac{1}{2}{\|w\|}^{2}_{2}$, \ luego $$W=I-\frac{1}{\theta}ww^{H}$$ es la transformación de Householder con $Wx=-\sigma e^{(1)}$.\\
 Siendo $\lambda$ el autovalor hallado de $A$ y $x$ su respectivo autovector. Construiremos la transformación $T$ usando la propiedad de modo que:  $$Tx=-sign(x_{1})\|x\|_{2}e^{(1)}=-sign(x_{1})e^{(1)}$$ asumiendo además $\|x\|_{2}=1$, luego:\\
-$$T^{2}=x=-sign(x_{1})Te^{(1)}$$ya que $T$ es unitaria. De aquí se obtiene $Te^{(1)}=-sign(x_{1})x$. De esto, la primera columna de $T$ es el autovector $-sign(x_{1})x$. Por lo tanto $T=(-sign(x_{1})x,U)$ donde $U$ resulta ser unitario de orden $n\times(n-1)$, de esta forma encontramos $U$. \\
+$$T^{2}x=-sign(x_{1})Te^{(1)}$$ya que $T$ es unitaria. De aquí se obtiene $Te^{(1)}=-sign(x_{1})x$. De esto, la primera columna de $T$ es el autovector $-sign(x_{1})x$. Por lo tanto $T=(-sign(x_{1})x,U)$ donde $U$ resulta ser unitario de orden $n\times(n-1)$, de esta forma encontramos $U$. \\
 
 \noindent Con el método de la potencia y la deflacción podremos hallar todos los autovalores de nuestra matriz, así obtenemos la forma canónica de Jordan $J$, $A=PJP^{-1}$, donde P es la matriz de cambio de base (de una base B' de V a la base formada por los $B_{i}$, como se mostró anteriormente).
-\end{multicols}{2}
-\newpage
-\section{Análisis}
+
+\noindent Ahora introduciremos otro método para calcular los autovalores de nuestra matriz $A^{n\times n}$.
+\subsubsection{Método QR:}
+\noindent El método QR es un método iterativo que consiste en reducir una matriz a una forma triangular.\\ Debido a que el número de operaciones que utiliza para una matriz cualquiera es proporcional a $n^3$, primero se transformará la matriz a una matriz de Hessenberg de esta manera el número de operaciones que se utilizarán será proporcional a $n^2$, así el método será más eficiente.\\
+
+\noindent El algoritmo QR para calcular los autovalores de una matriz A consiste en dos pasos:\\
 \begin{enumerate}
-	\item \label{item1} Construye una matriz que recoja los datos obtenidos en la prueba de tiro por el Caballero Cadete en estudio.
-		Matriz de puntuaciones semana 1
+	\item Reducción de A a la forma de Hessenberg.
+	\item Aplicar la descomposición QR a la forma de Hessenberg obtenida.
+\end{enumerate}
+
+\noindent Para reducir A a su forma Hesssenberg, empleamos las transformaciones de Householder, dado $A_{1}=A$ una matriz $n\times n$. En k-ésimo paso la matriz tiene la forma:\\
+$$A_{k}=\left(\begin{array}{c c c}
+A_{11}^{(k)} & A_{12}^{(k)} & A_{13}^{(k)} \\
+0          & A_{22}^{(k)} & A_{23}^{(k)}
+\end{array}\right)$$ donde $A_{11}^{(k)}$ es $k\times (k-1)$, $A_{12}^{(k)}$ es $k\times1$, $A_{22}^{(k)}$ es $(n-k)\times1$, $A_{13}^{(k)}$ es $k\times(n-k)$ y $A_{23}^{(k)}$ es de orden $(n-k)\times(n+k)$. Sea la matriz $H_{k}$ una matriz de Householder tal que $$H_{k}A_{22}^{(k)}=\pm\|A_{22}^{(k)}\|e^{(1)}$$ donde $e^{(1)}$ es el primer vector unitario en $\mathbb{R}^{(n-k)}$
+y dado $$U_{k}=\left(\begin{array}{cc}
+I_{k}  & 0 \\
+0 & H_{k}
+\end{array}\right)$$
+Luego, $A_{k+1}=U_{k}^{H}AU_{k}=U_{k}AU_{k}$
+$$=\newline\left(\begin{array}{c c c}
+A_{11}^{(k)}    & A_{12}^{(k)}                  & A_{13}^{(k)}H_{k} \\
+0             & \pm\|A_{22}^{(k)}\|e_{1}^{(1)} & H_{k}A_{23}^{(k)}H_{k}
+\end{array}\right)$$\\
+el cual conduce a la matriz de Hessenberg.Finalmente la matriz de Hessenberg es la matriz de la forma:\\
+$$A_{n-1}=U_{n-2}^{H}U_{n-3}^{H}\dots U_{1}^{H}AU_{1}U_{2}\dots U_{n-2}$$
+Así la  matriz $A_{n-1}$ resulta ser semejante a $A$, esto es tiene los mismos autovalores. Una vez obtenida la matriz de Hessenberg $B$, se procede a iterar a partir de $B_{0}=B$,$$B_{k-1} = Q_{k}R_{k}$$
+$$B_{k}=R_{K}Q_{k}, \  k=1, 2, \dots$$ tendiendo $B_{k}$ a una matriz triangular superior, cuyos elementos de la diagonal principal son los autovalores de $A$.
 
 
+\end{multicols}
 
-\setcounter{MaxMatrixCols}{20}
-$$\begin{bmatrix}
-1& 0& 0& 0&  0&  0&  0& 0& 0& 0& 0& 0\\
-0& s& 0& 0&  0&  0&  0& 0& 0& 0& 0& 0\\
-1& 1& s& 0&  0&  0&  0& 0& 0& 0& 0& 0\\
-0& 0& 0& 1& -1&  2& -1& 0& 0& 0& 0& 0\\
-0& 0& 0& 0&  1&  0&  0& 0& 0& 0& 0& 0\\
-0& 0& 0& 0&  0& -1&  1& 0& 0& 0& 0& 0\\
-0& 0& 0& 0&  0&  0&  1& 0& 0& 0& 0& 0\\
-0& 0& 0& 0&  0&  0&  0& 1& s& 0& 0& 0\\
-0& 0& 0& 0&  0&  0&  0& 0& 1& s& 0& 0\\
-0& 0& 0& 0&  0&  0&  0& 0& 0& 1& s& 0\\
-0& 0& 0& 0&  0&  0&  0& 0& 0& 0& 1& s\\
-0& 0& 0& 0&  0&  0&  0& 0& 0& 0& 0& 1
+\noindent\textit{\underline{IMPORTANTE}}:
+El cálculo de $J(A)^{k}$, no lo realizaremos con $J(A)$, sino con los bloques de Jordan, pues sabemos:
+
+$$
+J(A)^k = \begin{bmatrix}
+J(A, \lambda_{1})^k_{q_{1}\times q_{1}}&O&\ldots&O\\
+O&J(A, \lambda_{2})^k_{q_{2}\times q_{2}}&\ldots&O\\
+\vdots&\vdots& \ddots& \vdots\\
+O&O&\ldots&J(A, \lambda_{m})^k_{q_{m}\times q_{m}}
+\end{bmatrix},
+$$
+donde $q_{i}\in\mathbb{N}$ es el menor indice tal que $(A-\lambda_{i}I)^{q_{i}} = (A-\lambda_{i}I)^{q_{i}+1}$.
+
+Y además tenemos la siguiente relación de recurencia para calcular la potencia $k$-ésima de los bloques de Jordan:
+
+$$J(A, \lambda_{i})^{k}=\begin{bmatrix}
+\lambda^{k} & {k \choose 1}\lambda^{k-1}   & {k \choose 2}\lambda^{k-2} & \cdots       & {k \choose m-1}\lambda^{k-m+1}\\
+& \lambda^{k}                &  {k \choose 1}\lambda^{k-1} & \dots       & {k \choose m-2}\lambda^{k-m+2}\\
+&                            &  \lambda^{k}                & \ddots     &  \vdots\\                  &                            &                             & \ddots     & {k \choose 1}\lambda^{k-1}\\                  &                            &                             &             & \lambda^{k}
 \end{bmatrix}$$
+Note que para calcular la potencia $k$-ésima de $J(A,\lambda_{i})$, no tenemos que calcular todos los elementos de $J(A, \lambda_{i})$ , sino solo calcular la primera fila y luego ir recortando el último elemento para fila siguiente.
 
-	\item Calcule una expresión general para la potencia k-ésima de la matriz de \ref{item1}
-	\begin{center}
-		\includegraphics[page=2, trim= 4cm 2cm 1cm 4cm ,clip,scale=0.65]{MatrixSimb.pdf}
-	\end{center}
 
-	\item Suponiendo que la matriz de puntuación del Caballero Cadete en tiro la semana k se obtiene con la potencia k de la matriz obtenida en la primera práctica, calcule la matriz de puntuaciones obtenidas por dicho Caballero Cadete en la semana 10 de curso, sabiendo que la bonificación de diana en esa semana es 5 puntos.
+\begin{multicols}{2}
+	\section{Análisis}
 	
-	Matriz de puntuaciones de la semana  10.
+	\noindent\textbf{ Problema a resolver:}\\
+	\noindent Se programa una práctica de tiros para los cadetes de la academia General Militar de Zaragoza para esto se dispone de 12 dinas, en cada dina se dispara con un fusil HK con ráfagas de 12 disparos. Las puntuaciones según el área donde cae el tiro son las siguientes:
+	\begin{itemize}
+		\item Disparo fuera de la dina penaliza -1 punto.
+		\item Disparo localizado en la zona D no contabiliza puntos.
+		\item Disparo localizado en la zona C suma 1 punto.
+		\item Disparo localizado en la zona B suma 2 puntos
+		\item Disparo localizado en la zona A, es decir diana, obtiene una bonificación plus que se determina dependiendo de la semana (es una variable, la llamamos s).
+	\end{itemize}
+	Las puntuaciones obtenidas por un cadete en su primera práctica de tiro son los siguientes:
+	\begin{itemize}
+		\item Diana 1: Primer disparo sector C.
+		\item Diana 2: Segundo disparo en diana.
+		\item Diana 3 : Primer y segundo disparo sector C, tercer disparo en diana.
+		\item Diana 4 : Cuarto disparo sector C, sexto disparo sector B.
+		\item Diana 5 : Quinto disparo sector C.
+		\item Diana 6 : Séptimo disparo sector C.
+		\item Diana 7 : Séptimo disparo sector C.
+		\item Diana 8 : Octavo disparo sector C, noveno disparo en diana.
+		\item Diana 9 : Noveno disparo sector C, décimo disparo en diana.
+		\item Diana 10 : Décimo disparo sector C, undécimo disparo en diana.
+		\item Diana 11 : Undécimo disparo sector C, duodécimo disparo en diana.
+		\item Duodécimo disparo sector C.
+		
+	\end{itemize}
+	Los disparos fuera se dieron en :
+	\begin{itemize}
+		\item Diana 4 : Quinto y séptimo disparo.
+		\item Diana 6 : Sexto disparo.
+	\end{itemize}
+	El resto de disparos se dieron fuera de la zona D.\\
+	Las interrogantes a resolver son las siguientes:
+	
+	\begin{enumerate}
+		\item Construir una matriz (A) que recoja los datos obtenidos en la prueba de el cadete.
+		\item Obtener una expresión general para la potencia n-ésima de la matriz de A.
+		\item Suponiendo que la matriz de puntuación del cadete en la semana k se obtiene con la potencia k-ésima de la matriz A, calcular la matriz de puntuaciones obtenidas por dicho cadete en la semana 10 de curso, sabiendo que la bonificación en esa semana es de 5 puntos.
+		\item La puntuación final en tiro de una semana se obtiene calculando la norma de la matriz. Considerando que las normas utilizadas son $\|A\|_{\infty}$ y $\|A\|_{1}$. Calcular la puntuación final que obtendría el cadete en la semana 10 del curso (bonificación diana 5 puntos) si se aplica cada una de las normas anteriores. ¿Con qué norma saldría beneficiado?.
+	\end{enumerate}
+\end{multicols}
+
+\textbf{Solución:}\\
+\href{https://github.com/MillerSilva/Tiro-en-Diana/blob/master/proyecto2_numerico.ipynb}{\underline{click aquí para ver los algoritmos}}
+
+\begin{itemize}
+	
+	\item Agruparemos los puntajes de las practicas de tiro para los Caballeros Cadetes en una matriz $A$, donde $A_{ij}$ representa la puntuación del tiro $j-$esimo en la $i-$esima diana. Asi obtenemos:
+	
+	\setcounter{MaxMatrixCols}{20}
+	\begin{equation}\label{item1}
+	A = \begin{bmatrix}
+	1& 0& 0& 0&  0&  0&  0& 0& 0& 0& 0& 0\\
+	0& s& 0& 0&  0&  0&  0& 0& 0& 0& 0& 0\\
+	1& 1& s& 0&  0&  0&  0& 0& 0& 0& 0& 0\\
+	0& 0& 0& 1& -1&  2& -1& 0& 0& 0& 0& 0\\
+	0& 0& 0& 0&  1&  0&  0& 0& 0& 0& 0& 0\\
+	0& 0& 0& 0&  0& -1&  1& 0& 0& 0& 0& 0\\
+	0& 0& 0& 0&  0&  0&  1& 0& 0& 0& 0& 0\\
+	0& 0& 0& 0&  0&  0&  0& 1& s& 0& 0& 0\\
+	0& 0& 0& 0&  0&  0&  0& 0& 1& s& 0& 0\\
+	0& 0& 0& 0&  0&  0&  0& 0& 0& 1& s& 0\\
+	0& 0& 0& 0&  0&  0&  0& 0& 0& 0& 1& s\\
+	0& 0& 0& 0&  0&  0&  0& 0& 0& 0& 0& 1
+	\end{bmatrix}
+	\end{equation}
+	
+	\item A continuación procederemos a calcular la potencia k-esima de la matriz  (\ref{item1}), de forma indirecta, es decir calcularemos la matriz de jordan de la matriz A. Y usando la siguiente relación entre $J(A)$ y $A$.
+	$$A^{k} = PJ(A)^{k}P^{-1}$$
+	\begin{center}
+		\includegraphics[page=1, trim= 0.5cm 8.7cm 0.5cm 5.5cm ,clip,scale=0.55]{MatrixJordan.pdf}
+	\end{center}
+	\begin{center}
+		\includegraphics[page=2, trim= 4cm 2cm 0cm 4cm ,clip,scale=0.62]{MatrixSimb.pdf}
+	\end{center}
+	
+	\item Como la matriz de puntuación del Caballero Cadete en tiro la semana k se obtiene con la potencia k de la matriz obtenida en la primera práctica $A$
+	Entonces la matriz de puntuaciones de la semana  10 es:
 	\begin{center}
 		\includegraphics[page=3,trim= 4.3cm 4cm 4cm 4cm, clip, scale=0.75]{MatrixSimb}
 	\end{center}
 	
-	\item La puntuación final en tiro de una semana se obtiene calculando la norma de una matriz. Considerando que las normas utilizadas son $\Vert A\Vert_{\infty}$ y $\Vert A\Vert_{1}$ . Calcule la puntación final que obtendría el Caballero Cadete en estudio en la semana 10 del curso (bonificación diana 5 puntos) si se aplica cada una de las normas anteriores. ¿ Con qué norma saldría beneficiado ?
-		\begin{itemize}
-			\item $\Vert A^{10}\Vert_{\infty} = 31738281.0000000$
-			\item $\Vert A^{10}\Vert_{1} = 29296875.0000000$
-		\end{itemize}
-		$\therefore$ EL Caballero Cadete se verá beneficiado si su puntuación se calcula con la norma del máximo $(\Vert .\Vert_{\infty})$
-\end{enumerate}
+	\item Como la puntación final de una semana se obtiene calculando la norma de la matriz. Asi para semana 10 tenemos las siguientes puntuaciones finales(dependen de la norma que se utilice):
+	\begin{itemize}
+		\item $\Vert A^{10}\Vert_{\infty} = 31738281.0000000$
+		\item $\Vert A^{10}\Vert_{1} = 29296875.0000000$
+	\end{itemize}
+	$\therefore$ Por lo tanto eL Caballero Cadete será beneficiado si su puntuación se calcula con la norma del máximo $(\Vert .\Vert_{\infty})$
+\end{itemize}
 
 \begin{multicols}{2}
 	\section{Conclusiones}
 	\begin{enumerate}
 		\item El uso de múltiples algoritmos efectivamente aumentan la eficiencia para la obtención de los cálculos, dado que se logra reducir la cantidad de operaciones realizadas por la máquina.
 		\item Para la obtención de la n-ésima potencia, los cálculos fueron hechos a partir de los bloques de Jordan, tomando como referencia la primera fila de valores y haciendo unas sencillas modificaciones para obtener las demás, mejorando así el tiempo de ejecución del algoritmo.
-		\item El algoritmo implementado para calcular la matriz de Jordan, puede ser utilizado para calcular funciones de matrices que puedan ser expresados mediante series de Taylor, dado que para esto sólo sería necesario realizar una sumatoria de su forma de Jordan elevado a un exponente 'k'. 
+		\item El algoritmo implementado para obtener la n-ésima potencia de la matriz de Jordan, puede ser utilizado para calcular funciones de matrices que puedan ser expresados mediante series de Taylor, dado que para esto sólo sería necesario realizar una sumatoria de su forma de Jordan elevado a un exponente 'k'. 
 	\end{enumerate}
 \end{multicols}
 
 \begin{center}
- -----------------------------------------------------------------------------------
+	-----------------------------------------------------------------------------------
 \end{center}
 \begin{multicols}{2}
-\begin{list}{}{\setlength{\topsep}{0mm}\setlength{\itemsep}{0mm}%
-\setlength{\parsep}{0mm}\setlength{\leftmargin}{4mm}}
-%
-%------------------------------------- References --------------------
-\small
-\item[1.] Azmy S Ackleh. \textit{Classical and modern numerical analysis}, Chapman \& Hall/CRC (2010).
-\item[2.] David Kincaid, Ward Cheney. \textit{Numerical Analysis Mathematics of Scientific Computing}, 3rd edition (2002).
-\item[3.] Claus Fuhrer, Jan Erik Solem, Olivier Verdier. \textit{Scientific Computing with Python 3}, 2nd edition(2017).
-%---------------------------------------------------------------------
-%
-\end{list}
+	\begin{list}{}{\setlength{\topsep}{0mm}\setlength{\itemsep}{0mm}%
+			\setlength{\parsep}{0mm}\setlength{\leftmargin}{4mm}}
+		%
+		%------------------------------------- References --------------------
+		\small
+		\item[1.] Azmy S Ackleh. \textit{Classical and modern numerical analysis}, Chapman \& Hall/CRC (2010).
+		\item[2.] David Kincaid, Ward Cheney. \textit{Numerical Analysis Mathematics of Scientific Computing}, 3rd edition (2002).
+		\item[3.] Claus Fuhrer, Jan Erik Solem, Olivier Verdier. \textit{Scientific Computing with Python 3}, 2nd edition(2017).
+		%---------------------------------------------------------------------
+		%
+	\end{list}
 \end{multicols}
 
 
