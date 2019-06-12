@@ -274,15 +274,15 @@ Ahora $x^{H}x=1$  y $x$ es ortogonal a las columnas de $U$, es decir, $U^{H}x=0$
 $$(x,U)^{H}A(x,U)=\left(\begin{array}{cc}
   \lambda   &  h^{H}\\
     0 & C
-\end{array}\right)...(*)$$ Donde $C=U^{H}AU$ es de orden  $(n-1)\times (n-1)$ y $h^{H}=x^{H}AU$. Así la matriz(*) tiene como autovalores a $\lambda$ y a los autovalores de $C$ y como esta matriz es semejante a $A$ tienen los mismo autovalores por eso solo implicaría hallar los autovalores de la matriz $C$.\\
+\end{array}\right)...(*)$$ Donde $C=U^{H}AU$ es de orden  $(n-1)\times (n-1)$ y $h^{H}=x^{H}AU$. Así la matriz(*) tiene como autovalores a $\lambda$ y a los autovalores de $C$ y como esta matriz es semejante a $A$ tienen los mismo autovalores, por ello sólo bastaría ahora hallar los autovalores de la matriz $C$.\\
 Ahora, para determinar $U$ usamos las transformaciones de Householder.\\
 
 \noindent\textbf{Propiedad}\\
 \noindent Si $x \in\mathbb{R}^n, \ x_{1}$ su primera componente, $x\neq0$, $ \sigma=sign(x_{1})\|x\|_{2}$ donde $sign(0)=+1$, y si $w=x+\sigma e^{(1)} \ y \ \theta=\frac{1}{2}{\|w\|}^{2}_{2}$, \ luego $$W=I-\frac{1}{\theta}ww^{H}$$ es la transformación de Householder con $Wx=-\sigma e^{(1)}$.\\
-Siendo $\lambda$ el autovalor hallado de $A$ y $x$ su respectivo autovector construiremos la transformación $T$ usando la propiedad de modo que:  $$Tx=-sign(x_{1})\|x\|_{2}e^{(1)}=-sign(x_{1})e^{(1)}$$ asumiendo además $\|x\|_{2}=1$, luego:\\
+Siendo $\lambda$ el autovalor hallado de $A$ y $x$ su respectivo autovector. Construiremos la transformación $T$ usando la propiedad de modo que:  $$Tx=-sign(x_{1})\|x\|_{2}e^{(1)}=-sign(x_{1})e^{(1)}$$ asumiendo además $\|x\|_{2}=1$, luego:\\
 $$T^{2}=x=-sign(x_{1})Te^{(1)}$$ya que $T$ es unitaria. De aquí se obtiene $Te^{(1)}=-sign(x_{1})x$. De esto, la primera columna de $T$ es el autovector $-sign(x_{1})x$. Por lo tanto $T=(-sign(x_{1})x,U)$ donde $U$ resulta ser unitario de orden $n\times(n-1)$, de esta forma encontramos $U$. \\
 
-\noindent Con el método de la potencia y la deflacción podremos hallar todos los autovalores propios de nuestra matriz, así obtenemos la forma canónica de jordan $J$, $A=PJP^{-1}$, donde P es la matriz de cambio de base (de una base B' de V a la base formada por los $B_{i}$ como se mostró anteriormente).
+\noindent Con el método de la potencia y la deflacción podremos hallar todos los autovalores de nuestra matriz, así obtenemos la forma canónica de jordan $J$, $A=PJP^{-1}$, donde P es la matriz de cambio de base (de una base B' de V a la base formada por los $B_{i}$, como se mostró anteriormente).
 \end{multicols}{2}
 \newpage
 \section{Análisis}
@@ -336,7 +336,7 @@ A = \begin{bmatrix}
 	\begin{enumerate}
 		\item El uso de múltiples algoritmos efectivamente aumentan la eficiencia para la obtención de los cálculos, dado que se logra reducir la cantidad de operaciones realizadas por la máquina.
 		\item Para la obtención de la n-ésima potencia, los cálculos fueron hechos a partir de los bloques de Jordan, tomando como referencia la primera fila de valores y haciendo unas sencillas modificaciones para obtener las demás, mejorando así el tiempo de ejecución del algoritmo.
-		\item El algoritmo implementado para calcular la matriz de Jordan, puede ser utilizado para calcular funciones de matrices que puedan ser expresados mediante series de Taylor, dado que para esto sólo sería necesario realizar una sumatoria de su forma de Jordan elevado a un exponente 'k'. 
+		\item El algoritmo implementado para obtener la n-ésima potencia de la matriz de Jordan, puede ser utilizado para calcular funciones de matrices que puedan ser expresados mediante series de Taylor, dado que para esto sólo sería necesario realizar una sumatoria de su forma de Jordan elevado a un exponente 'k'. 
 	\end{enumerate}
 \end{multicols}
 
