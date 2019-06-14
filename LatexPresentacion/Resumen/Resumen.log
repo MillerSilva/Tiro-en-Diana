@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.2.12)  28 MAY 2019 23:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.2.12)  14 JUN 2019 11:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -805,7 +805,7 @@ Here is how much of TeX's memory you used:
  21352 multiletter control sequences out of 15000+600000
  10045 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,5n,81p,1691b,441s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,5n,81p,1804b,441s stack positions out of 5000i,500n,10000p,200000b,80000s
 </opt/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></opt/texl
 ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></opt/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmmi6.pfb></opt/texlive/texmf-dist/fonts/type1
@@ -817,7 +817,7 @@ fonts/type1/public/amsfonts/cm/cmsy6.pfb></opt/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmsy9.pfb></opt/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmti10.pfb></opt/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.p
 fb></opt/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Resumen.pdf (2 pages, 134373 bytes).
+Output written on Resumen.pdf (2 pages, 135915 bytes).
 PDF statistics:
  95 PDF objects out of 1000 (max. 8388607)
  61 compressed objects within 1 object stream

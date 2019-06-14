@@ -74,323 +74,257 @@
 \end{center}
 %\maketitle 
 \vspace*{1cm}
+\renewcommand{\sin}{sen}
 \begin{abstract}
-
-\noindent El estudio de las matrices es fundamental para todo aquel que desea sumergirse en el maravilloso mundo de las matemáticas. Las matrices son parte escencial de ésta y son ampliamente usadas en diversas áreas como lo es en el álgebra lineal, el análisis numérico y las probabilidades. Por ejemplo, para modelar el comportamiento de la propagación de un virus ``T'', se usa la potenciación de matrices; supongamos que tenemos una población de personas sanas ($S$) e infectadas ($I$) donde las personas sanas tienen un $80\%$ de probabilidad de no infectarse en 2 días, y que además hay una cura con $1\%$ de efectividad, estos datos se ordenan en una matriz $A$. Luego si empezamos con una población de 99 personas sanas y 1 infectado, dentro de 2 días tedríamos que la nueva población es: 
-\begin{equation*}
-\begin{pmatrix} S\\I \end{pmatrix}_2 
-=
-\begin{pmatrix} 0.8 & 0.01\\0.2&0.99 \end{pmatrix} 
-\begin{pmatrix} 99\\ 1 \end{pmatrix}_0
-=
-\begin{pmatrix} 79.21 \\ 20.79 \end{pmatrix}_2, 
-\end{equation*}
-es decir que aproximadamente tendríamos 79 personas sanas y 21 infectadas; y ¿qué pasaría en $2n$ días?, bueno tendríamos que la población sería $A^nX_0$. Es aquí donde comienzan las complicaciones, dado que elevar una matriz a su n-ésima potencia no es tarea fácil, sin embargo existe una maravillosa herramienta matemática que nos ayudará a simplificar los cálculos; nos referimos a la matriz de Jordan. La matriz de Jordan satisface $A^n=PJ^nP^{-1}$, lo cual aplicando esto a nuestro problema anterior tendríamos que:
-\begin{equation*}
-A^n=
-\begin{pmatrix} 0.8 & 0.01\\0.2&0.99 \end{pmatrix}^n
-=
-\begin{pmatrix} -0.05&-0.71\\ -1.00 &0.71 \end{pmatrix}
-\begin{pmatrix} 1&0\\ 0 &0.79  \end{pmatrix}^n
-\begin{pmatrix} -0.05&-0.71\\ -1.00 &0.71 \end{pmatrix}^{-1}
-\end{equation*}
-ahora si $n$ es muy grande obtenemos:
-\begin{equation*}
-\begin{pmatrix} 1&0\\ 0 &0.79  \end{pmatrix}^n
-\rightarrow
-\begin{pmatrix} 1&0\\ 0 &0 \end{pmatrix}
-\Rightarrow
-A^n\rightarrow \begin{pmatrix} 0.05&0.05\\ 0.95 &0.95 \end{pmatrix}
-\end{equation*}
-finalmente cuando $n\to\infty$ la población esperada es:
-\begin{equation*}
-\begin{pmatrix} S\\I \end{pmatrix}_\infty
-=
-\begin{pmatrix} 0.05&0.05\\ 0.95 &0.95 \end{pmatrix}
-\begin{pmatrix} 99\\1 \end{pmatrix}
-=\begin{pmatrix} 4.76\\95.24 \end{pmatrix},
-\end{equation*}
-esto es, 5 personas sanas y 95 infectadas; ¿increíble verdad?.
-
-Vemos así que \textit{la matriz de Jordan} es muy útil para simplificar operaciones; el desafío es hallarla; para esto es necesario calcular los valores propios de $A$, los cuales podemos obtener usando algunos métodos del análisis numérico tales como \textit{el método potencia, potencia inversa y QR}. Para nuestra suerte ya se conoce la forma general de la potencia  $n-$ésima de la matriz de Jordan.
-
-Este trabajo se centra en calcular la potencia $k-$ésima de una matriz $A\in\R^{12\times 12}$ (\textit{la matriz de puntuación}), la cual contiene puntuaciones de una prueba de tiro en dianas realizados por un cadete, para esto calcularemos su matriz de Jordan asociada, ayudándonos de los métodos numéricos ya mencionados y algunos otros algoritmos de apoyo para calcular los valores propios y los bloques de Jordan.
+	\noindent El estudio de las matrices es fundamental para todo aquel que desea sumergirse en el maravilloso mundo de las matemáticas, ya que las matrices se encuentran en áreas como el álgebra lineal, el análisis numérico y las probabilidades. Las matrices tienen varios usos en matemática que van desde el ordernamiento datos hasta incluso la definición de nuevas  funciones como $\sin(A),e^A, a_0+a_1A+\ldots+a_nA^n$; otro uso muy frecuente es la potenciación de matrices, usual en grafos (matriz de adyacencia). Imaginemos que quisiéramos hallar la potencia diez de una matriz $A\in\mathbb{R}^{12\times 12} $, querer calcularlo directamente sería una cosa de locos; para estos casos los matemáticos recomiendan trabajar con una matriz diagonal que sea semejante a $A$ esto es $A=PDP^{-1}$ la cual verifica $A^n=PD^nP^{-1}$, donde hallar la $D^n$ resulta mucho más fácil que $A^n$. Con esto podríamos estar tranquilos pero ¿Qué pasa si la matriz no es semejante a ninguna matriz diagonal?, aún podemos guardar la calma ya que en este caso podemos usar la forma canónica de Jordan de la matriz $A$, con el que también se cumple que $A^n=PJ^nP^{-1}$. \textit{La matriz de Jordan} es una bonita herramienta matemática que nos ayuda a simplificar operaciones, para nuestra suerte ya se conoce la forma general de potencia $n-$ésima de la matriz de Jordan, lo ``difícil'' ahora es saber cómo hallarlo; para hallarlo es necesario calcular los valores propios de $A$, esto lo podemos hacer usando herramientas del análisis numérico como \textit{el método potencia, potencia inversa y QR}. Este trabajo se centra en calcular la potencia $k-$ésima de una matriz $A$ (\textit{la matriz de puntuación}), para esto usaremos lo mencionado lineas arriba.
 \end{abstract}
 
 \begin{quotation}
 	{\small
 		\noindent\textbf{Palabras Clave:} \\ 
-	La matriz de Jordan, Método potencia , Método potencia inversa, Método QR, Matriz de puntuación \\
+		La matriz de Jordan, Método potencia , Método potencia inversa, Método QR, Matriz de puntuación \\
 	}
 \end{quotation}
 
 \renewcommand{\abstractname}{Abstract}
 \begin{abstract}
-	\noindent The study of matrices is fundamental for those who wish to immerse themselves in the wonderful world of mathematics, since matrices are in areas such as Linear Algebra, Numerical Analysis and Probabilities. For example to model the behavior of virus propagation T, it use matrices potentiation, suppose we have a population healthy($S$) and infected$(I)$, with an $80\%$ chance that healthy people will not become infected in two days, and also there is a cure with $1\%$ effectiveness, hese data are ordered in a matrix $A$. Then if we have a population of 99 healthy persons and 1 infected person, 2 days later we would have that the new population is:
-	$$
-	\begin{pmatrix} S\\I \end{pmatrix}_2 
-	=
-	\begin{pmatrix} 0.8 & 0.01\\0.2&0.99 \end{pmatrix} 
-	\begin{pmatrix} 99\\ 1 \end{pmatrix}_0
-	=
-	\begin{pmatrix} 79.21 \\ 20.79 \end{pmatrix}_2, 
-	$$
-	this is approximately we would have 79 healthy persons and 21 infected persons, and ¿What would happen with the population in 2 days?, well the population would be $A^{n}X_{0}$. It's here where
-	things get complicated, but we can use a wonderful mathematical tool  that would help us simplify the calculations, we are talking about the matrix of Jordan, which satisfies $A^{n}=PJ^{n}P^{-1}$, so we would have:\\
-	\begin{equation*}
-	A^n=
-	\begin{pmatrix} 0.8 & 0.01\\0.2&0.99 \end{pmatrix}^n
-	=
-	\begin{pmatrix} -0.05&-0.71\\ -1.00 &0.71 \end{pmatrix}
-	\begin{pmatrix} 1&0\\ 0 &0.79  \end{pmatrix}^n
-	\begin{pmatrix} -0.05&-0.71\\ -1.00 &0.71 \end{pmatrix}^{-1}
-	\end{equation*}
-	Now, if $n$ is a very large number, we would have:\\
-	$$
-	\begin{pmatrix} 1&0\\ 0 &0.79  \end{pmatrix}^n
-	\rightarrow
-	\begin{pmatrix} 1&0\\ 0 &0 \end{pmatrix}
-	\Rightarrow
-	A^n\rightarrow \begin{pmatrix} 0.05&0.05\\ 0.95 &0.95 \end{pmatrix}
-	$$
-	Finally, when $n\to\infty$ the expected population is:\\
-	$$
-	\begin{pmatrix} S\\I \end{pmatrix}_\infty
-	=
-	\begin{pmatrix} 0.05&0.05\\ 0.95 &0.95 \end{pmatrix}
-	\begin{pmatrix} 99\\1 \end{pmatrix}
-	=\begin{pmatrix} 4.76\\95.24 \end{pmatrix},
-	$$
-	this is 5 healthy persons and 95 persons infected. That's incredible, right?!
-	
-	\noindent So, we see that \textit{Jordan matrix} is very useful to simplify operations; the ``complication''
-	is to find it; for this it's necessary to calculate the eigenvalues of $A$, this we can do
-	using numerical analysis tools such as \textit{the power method, inverse power and
-		QR}. For our luck we already know the general form of $J^{n}$, with $J$:
-	Jordan matrix.
-	
-	\noindent This work focuses on calculating the power $k$ of a matrix $A \in \mathbb{R}^{12\times12}$
-	(\textit{the scoring matrix}), where $A$ contains  the scores of the shooting test of a
-	cadet, for this we will use the Jordan Form and the numerical methods, indicated
-	lines above, to calculate the eigenvalues and blocks' Jordan.
+	\noindent The study of matrices is fundamental for anyone who wants to immerse themselves in the wonderful world of mathematics, since matrices are found in areas such as linear algebra and numerical analysis and the probabilities. Matrices have several uses in mathematics ranging from data processing to the definition of new functions such as $\sin(A),e^A, a_0+a_1A+\ldots+a_nA^n$; another very frequent use is matrix enhancement, usual in graphs (adjacency matrix). Imagine that we would like to find the ten power of a matrix $A\in\mathbb{R}^{12\times 12} $, to want to calculate it directly would be a crazy thing; for these cases, mathematicians recommend working with a diagonal matrix that is similar to $A$ this is $A=PDP^{-1}$ which verifies $A^n=PD^nP^{-1}$ , where to find the $D^n$ it's much easier than $A^n$. With this we could be calm but ¿What happens if the matrix is not similar to any diagonal matrix? We can still keep calm because in this case we can use Jordan's canonical form of the matrix  $A$, with which it is also true that $A^n=PJ^nP^{-1}$. \textit{The matrix of Jordan} is a nice mathematical tool that helps us to simplify operations, for our luck we already know the general form of $n$-th power of the matrix of Jordan, the `` difficult '' now is to know how to find it; to find it, it is necessary to calculate the eigenvalues of $A$, this can be done using numerical analysis tools such as \textit{the power method, inverse power and QR}. This work focuses on calculating the k-th power of a matrix A (\textit{the scoring matrix}), for this we will use the aforementioned lines.
 \end{abstract}
+
 
 \begin{quotation}
 	{\small
 		\noindent \textbf{Keywords:} \\ 
-		The matrix of Jordan, The power method , The inverse power method, The method QR, The scoring matrix \\
+		The matrix of Jordan, The power method , The inverse power method, The method QR, the scoring matrix \\
 	}
 \end{quotation}
 
 \newpage
 
 \begin{multicols}{2}
-\section{Introducción}
-
-\noindent En la Academia General Militar de Zaragoza se lleva a cabo la preparación física y técnica de los alumnos o cadetes para la superación de sus respectivos planes de estudio. La creación de hábitos deportivos en los cadetes es fundamental. Es decir, les presentan diferentes deportes militares (orientación, patrullas de tiro, pentatlón militar y concurso de patrullas) y se les inicia en equitación y la defensa personal militar.\\
-\noindent Ahora centrémonos solo en el deporte de tiro. Dicha práctica de tiro realizada por los cadetes, consiste en acertar a un objetivo utilizando algún proyectil.\\ Se hace llamar blanco de tiro (y de manera más general, blanco) al objeto que se desea alcanzar con el proyectil, cuando se hace fuego dirigiendo hacia él la puntería. Si se le «hiere», se dice que «se ha dado en el blanco» o «que se ha hecho blanco». \\
-\noindent El blanco de tiro característico es un cuadrado de cartulina con anillos concéntricos que suelen ser de color rojo, negro y blanco. El objetivo de las prácticas de tiro al blanco es alcanzar con series de disparos el  centro que lleva un disco pintado de color negro, este recibe el nombre de diana y sirve para marcar de un modo bien visible el sitio adonde se debe dirigir la puntería.
-\begin{center}
-\includegraphics[scale=0.25]{diana.png}\\
-Fig1: Diana que se usará en este trabajo.
-\end{center}
-\noindent En este proyecto analizaremos la práctica de tiro de un cadete en particular. Para este cadete, se dispone de 12 dianas  y en cada diana realizará 12 disparos. Las puntuaciones de cada disparo se ordenan en una matriz $A \in \mathbb{R}^{12\times 12}$ (\textit{matriz de puntuación de la semana 1}). Suponiendo que la \textit{matriz de puntuación de la semana $n$ }esta dada por $A^n$ y la \textit{puntuación final de tiro de la semana $n$ }está dada por la norma de la matriz ($||A^n||_1\text{ o }||A^n||_\infty$), se desea hallar la puntuación final de tiro de la semana 10 usando ambas normas y concluir con qué norma sale más beneficiado el cadete.
-
-\noindent La dificultad de este trabajo se centra en encontrar una expresión general para la potencia $n-$ésima de la matriz $A$, para esto vamos a usar la matriz de Jordan de $A$ ($J_A$) ya que se cumple $A^n=P^{-1}J^n_AP$, donde la potencia  $J^n_A$ es más fácil de hallar comparado a $A$.
-
-
-\section{Fundamento Teórico}
-
-\noindent Para dar con la descomposición canónica de Jordan de una matriz debemos introducir algunos conocimientos previos:
-
-\begin{mydef}[Operadores Lineales Nilpotentes]
-	El operador $T:V\to V$ es nilpotente si $T^{p} = 0$, para algún $p\in\mathbb{N}$. Además se dice que $k\in\mathbb{N}$ es el índice de nilpotencia de $T$ si $$T^{k-1}\neq 0 \ \wedge \ T^{k} = 0$$
-\end{mydef}
-
-\begin{mytheo}\label{theo_nilpotentes}  
-    \noindent Sea $T:V\to V$, $V$ un $\mathbb{C}$ espacio vectorial, $\dim V = n$, $T$ nilpotente de índice $q$. Luego para $v\in V \ | \ T^{q-1}v\neq 0$, tenemos:
-	\begin{enumerate}
-		\item El conjunto $\{T^{q-1}v, T^{q-2}v,\ldots,Tv, v\}$ es L.I.
-		\item S = $\left<\{T^{q-1}v, T^{q-2}v,\ldots,Tv, v\}\right>$ es invariante por $T$.
-		\item Existe un subespacio $U$ de $V$, invariante por $T$ tal que:
-		$$V = S\oplus U$$
-	\end{enumerate}
-\end{mytheo}
-
-\begin{mycorol}
-	Del teorema $(\ref{theo_nilpotentes})$
-	\begin{align*}
+	\section{Introducción}
+	
+	\noindent En la Academia General Militar de Zaragoza se lleva a cabo la preparación física y técnica de los alumnos o cadetes para la superación de sus respectivos planes de estudio. La creación de hábitos deportivos en los cadetes es fundamental. Es decir, les presentan diferentes deportes militares (orientación, patrullas de tiro, pentatlón militar y concurso de patrullas) y se les inicia en equitación y la defensa personal militar.\\
+	\noindent Ahora centrémonos solo en el deporte de tiro. Dicha práctica de tiro realizada por los cadetes, consiste en acertar a un objetivo utilizando algún proyectil.\\ Se hace llamar blanco de tiro (y de manera más general, blanco) al objeto que se desea alcanzar con el proyectil, cuando se hace fuego dirigiendo hacia él la puntería. Si se le «hiere», se dice que «se ha dado en el blanco» o «que se ha hecho blanco». \\
+	\noindent El blanco de tiro característico es un cuadrado de cartulina con anillos concéntricos que suelen ser de color rojo, negro y blanco. El objetivo de las prácticas de tiro al blanco es alcanzar con series de disparos el  centro que lleva un disco pintado de color negro, este recibe el nombre de diana y sirve para marcar de un modo bien visible el sitio adonde se debe dirigir la puntería.
+	\begin{center}
+		\includegraphics[scale=0.25]{diana.png}\\
+		Fig1: Diana que se usará en este trabajo.
+	\end{center}
+	\noindent En este proyecto analizaremos la práctica de tiro de un cadete en particular. Para este cadete, se dispone de 12 dianas  y en cada diana realizará 12 disparos. Las puntuaciones de cada disparo se ordenan en una matriz $A \in \mathbb{R}^{12\times 12}$ (\textit{matriz de puntuación de la semana 1}). Suponiendo que la \textit{matriz de puntuación de la semana $n$ }esta dada por $A^n$ y la \textit{puntuación final de tiro de la semana $n$ }está dada por la norma de la matriz ($||A^n||_1\text{ o }||A^n||_\infty$), se desea hallar la puntuación final de tiro de la semana 10 usando ambas normas y concluir con qué norma sale más beneficiado el cadete.
+	
+	\noindent La dificultad de este trabajo se centra en encontrar una expresión general para la potencia $n-$ésima de la matriz $A$, para esto vamos a usar la matriz de Jordan de $A$ ($J_A$) ya que se cumple $A^n=P^{-1}J^n_AP$, donde la potencia  $J^n_A$ es más fácil de hallar comparado a $A$.
+	
+	
+	\section{Fundamento Teórico}
+	
+	\noindent Para dar con la descomposición canónica de Jordan de una matriz debemos introducir algunos conocimientos previos:
+	
+	\begin{mydef}[Operadores Lineales Nilpotentes]
+		El operador $T:V\to V$ es nilpotente si $T^{p} = 0$, para algún $p\in\mathbb{N}$. Además se dice que $k\in\mathbb{N}$ es el índice de nilpotencia de $T$ si $$T^{k-1}\neq 0 \ \wedge \ T^{k} = 0$$
+	\end{mydef}
+	
+	\begin{mytheo}\label{theo_nilpotentes}  
+		\noindent Sea $T:V\to V$, $V$ un $\mathbb{C}$ espacio vectorial, $\dim V = n$, $T$ nilpotente de índice $q$. Luego para $v\in V \ | \ T^{q-1}v\neq 0$, tenemos:
+		\begin{enumerate}
+			\item El conjunto $\{T^{q-1}v, T^{q-2}v,\ldots,Tv, v\}$ es L.I.
+			\item S = $\left<\{T^{q-1}v, T^{q-2}v,\ldots,Tv, v\}\right>$ es invariante por $T$.
+			\item Existe un subespacio $U$ de $V$, invariante por $T$ tal que:
+			$$V = S\oplus U$$
+		\end{enumerate}
+	\end{mytheo}
+	
+	\begin{mycorol}
+		Del teorema $(\ref{theo_nilpotentes})$
+		\begin{align*}
 		S &= \left<\{T^{q-1}v, T^{q-2}v,\ldots,Tv, v\}\right>\\
 		&\Rightarrow\dim (S) = q\\			
-	\end{align*}
-%	Luego 
-%	\begin{align*}
-%		T(S) &= \left<\{T^{q-1}v, T^{q-2}v,\ldots,T^{2}v, Tv\}\right>\\
-%		&\Rightarrow\dim T(S) = q-1\\\\
+		\end{align*}
+		%	Luego 
+		%	\begin{align*}
+		%		T(S) &= \left<\{T^{q-1}v, T^{q-2}v,\ldots,T^{2}v, Tv\}\right>\\
+		%		&\Rightarrow\dim T(S) = q-1\\\\
 		%T^{2}(S) &= \left<\{T^{q-1}v, T^{q-2}v,\ldots,T^{3}v, T^{2}v\}\right>\\
 		%&\Rightarrow\dim T^{2}(S) = q-2
-%	\end{align*}
-    Inductivamente 
-	\begin{align*}
+		%	\end{align*}
+		Inductivamente 
+		\begin{align*}
 		T^{r}(S) &= \left<\{T^{q-1}v, T^{q-2}v,\ldots,T^{r+1}v, T^{r}v\}\right>\\
 		&\Rightarrow\dim T^{r}(S) = q-r\\			
-	\end{align*}
-\end{mycorol}
-\begin{mytheo}
-\noindent Sea $T:V\rightarrow V$, dimV=n. Entonces existen $U, W \subset V$ invariantes por T tal que :
-\begin{itemize}
-    \item $V=U\oplus W$ 
-    \item $T|_{U}:U\rightarrow U$ nilpotente  y\\ $T|_{W}:W\rightarrow W$ inversible
-\end{itemize}
-\end{mytheo}
-\noindent\textbf{NOTA:}
-\noindent Como $T|_{U}:U\rightarrow U$ es nilpotente entonces existe $q\in\mathbb{N} \ | \  \left(T|_{U}\right)^{q}=0 $ y $(T|_{U})^{q-1}\neq 0$. Ahora hallamos un $v\neq0$ tal que $(T|_{U})^{q-1}v\neq 0$. Así definimos 
-$$B_{1}=\{(T|_{U})^{q-1}v, (T|_{U})^{q-2}v, ..., (T|_{U})v,v \},$$ el cual es una base de U . Como W es invariante por T podemos definir $T|_{W}:W\rightarrow W$. Y volviendo a aplicar el teorema anterior $\exists \ U_{2}, W_{2} \subset W$ invariantes por $T$ tal que  $W=U_{2}\oplus W_{2}$,
-$T|_{U_{2}}: U_{2}\rightarrow U_{2}$ es nilpotente y $T|_{W_{2}}:W_{2}\rightarrow W_{2}$ inversible.\\
-Como $T|_{U_{2}}:U_{2}\rightarrow U_{2}$ es nilpotente, $\exists \ q_{2} \in \mathbb{N}$ tal que $ (T|_{U_{2}})^{q_{2}}=0$ y $(T|_{U_{2}})^{q_{2}-1}\neq 0$, además  $q_{1}=q\geq q_{2}.$
-Ahora hallando un $v_{2}\neq0$ tal que $ (T|_{U_{2}})^{q_{2}-1}v_{2}\neq 0$  se puede definir
-$$B_{2}=\{(T|_{U_{2}})^{q_{2}-1}v_{2}, (T|_{U_{2}})^{q_{2}-2}v_{2}, ..., (T|_{U_{2}})v_{2},v_{2} \}$$ el cual es una base para $U_{2}$. Luego de manera recursiva obtenemos: \\
-$$V=U_{1}\oplus U_{2}\oplus U_{3}\oplus ... \oplus U_{k},$$ donde $U_{1}=U$. Luego $B=\displaystyle\bigcup\limits_{i=1}^{k}B_{i} $ es base de $V$ y además \\
-$$\left [T\right]_{B}=\begin{bmatrix}
+		\end{align*}
+	\end{mycorol}
+	\begin{mytheo}
+		\noindent Sea $T:V\rightarrow V$, dimV=n. Entonces existen $U, W \subset V$ invariantes por T tal que :
+		\begin{itemize}
+			\item $V=U\oplus W$ 
+			\item $T|_{U}:U\rightarrow U$ nilpotente  y\\ $T|_{W}:W\rightarrow W$ inversible
+		\end{itemize}
+	\end{mytheo}
+	\noindent\textbf{NOTA:}
+	\noindent Como $T|_{U}:U\rightarrow U$ es nilpotente entonces existe $q\in\mathbb{N} \ | \  \left(T|_{U}\right)^{q}=0 $ y $(T|_{U})^{q-1}\neq 0$. Ahora hallamos un $v\neq0$ tal que $(T|_{U})^{q-1}v\neq 0$. Así definimos 
+	$$B_{1}=\{(T|_{U})^{q-1}v, (T|_{U})^{q-2}v, ..., (T|_{U})v,v \},$$ el cual es una base de U . Como W es invariante por T podemos definir $T|_{W}:W\rightarrow W$. Y volviendo a aplicar el teorema anterior $\exists \ U_{2}, W_{2} \subset W$ invariantes por $T$ tal que  $W=U_{2}\oplus W_{2}$,
+	$T|_{U_{2}}: U_{2}\rightarrow U_{2}$ es nilpotente y $T|_{W_{2}}:W_{2}\rightarrow W_{2}$ inversible.\\
+	Como $T|_{U_{2}}:U_{2}\rightarrow U_{2}$ es nilpotente, $\exists \ q_{2} \in \mathbb{N}$ tal que $ (T|_{U_{2}})^{q_{2}}=0$ y $(T|_{U_{2}})^{q_{2}-1}\neq 0$, además  $q_{1}=q\geq q_{2}.$
+	Ahora hallando un $v_{2}\neq0$ tal que $ (T|_{U_{2}})^{q_{2}-1}v_{2}\neq 0$  se puede definir
+	$$B_{2}=\{(T|_{U_{2}})^{q_{2}-1}v_{2}, (T|_{U_{2}})^{q_{2}-2}v_{2}, ..., (T|_{U_{2}})v_{2},v_{2} \}$$ el cual es una base para $U_{2}$. Luego de manera recursiva obtenemos: \\
+	$$V=U_{1}\oplus U_{2}\oplus U_{3}\oplus ... \oplus U_{k},$$ donde $U_{1}=U$. Luego $B=\displaystyle\bigcup\limits_{i=1}^{k}B_{i} $ es base de $V$ y además \\
+	$$\left [T\right]_{B}=\begin{bmatrix}
 	\left[T_{|U_{1}}\right]_{\beta_{1}}	&	O	&	\ldots	&	O\\
 	O	&	\left[T_{|U_{2}}\right]_{\beta_{2}}	&	\ldots	&	O\\
 	\vdots	&	\vdots	& \ddots	& \vdots\\
 	O	&	O	&	\ldots	&	\left[T_{|U_{k}}\right]_{\beta_{k}}
-\end{bmatrix}$$
- Donde 	$\left[T_{|U_{j}}\right]_{\beta_{j}}=\begin{bmatrix}
-		0	&	1	&	0	&	0	&	\ldots	&	0\\
-		0	&	0	&	1	&	0	&	\ldots	&	0\\
-		0	&	0	&	0	&	1	&	\ldots	&	0\\
-		\vdots	&	\vdots	&	\vdots	&	\vdots	&	\ddots	&	\vdots\\
-		0	&	0	&	0	&	0	&	\ldots	&	1\\
-		0	&	0	&	0	&	0	&	\ldots	&	0\\
+	\end{bmatrix}$$
+	Donde 	$\left[T_{|U_{j}}\right]_{\beta_{j}}=\begin{bmatrix}
+	0	&	1	&	0	&	0	&	\ldots	&	0\\
+	0	&	0	&	1	&	0	&	\ldots	&	0\\
+	0	&	0	&	0	&	1	&	\ldots	&	0\\
+	\vdots	&	\vdots	&	\vdots	&	\vdots	&	\ddots	&	\vdots\\
+	0	&	0	&	0	&	0	&	\ldots	&	1\\
+	0	&	0	&	0	&	0	&	\ldots	&	0\\
 	\end{bmatrix}_{q_{j}\times q_{j}}$
-
-\vspace{0.7cm}
-
-\begin{mytheo}[Forma Canónica de Jordan]
-	Sea $V$ un $\mathbb{C}$-espacio vectorial, $\dim V = n$, $$T:V\rightarrow V$$ un operador lineal, $\lambda_{1},\lambda_{2},\ldots,\lambda_{k}\in \wedge(T)$ y $n_{1}, n_{2},\ldots , n_{k}$ las multiplicidades algebraicas de los valores propios (respectivamente), entonces:
-
-Existen subespacios $V_{1}, V_{2},\ldots, V_{k}$ invariantes por $T\;\left(T(V_{i})\subseteq V_{i}\right)$ tales que:
-\begin{enumerate}
-	\item	$V = V_{1}\oplus V_{2}\oplus\ldots\oplus V_{k}$
-	\item $\dim V_{i} = n_{i},\quad i=1-k$
-	\item El operador $T-\lambda_{i}I:V_{i}\rightarrow V_{i}$ es nilpotente, $i=1-k$. (Aquí se aplica la propiedad ya antes mencionada para un operador nilpotente)
+	
+	\vspace{0.7cm}
+	
+	\begin{mytheo}[Forma Canónica de Jordan]
+		Sea $V$ un $\mathbb{C}$-espacio vectorial, $\dim V = n$, $$T:V\rightarrow V$$ un operador lineal, $\lambda_{1},\lambda_{2},\ldots,\lambda_{k}\in \wedge(T)$ y $n_{1}, n_{2},\ldots , n_{k}$ las multiplicidades algebraicas de los valores propios (respectivamente), entonces:
+		
+		Existen subespacios $V_{1}, V_{2},\ldots, V_{k}$ invariantes por $T\;\left(T(V_{i})\subseteq V_{i}\right)$ tales que:
+		\begin{enumerate}
+			\item	$V = V_{1}\oplus V_{2}\oplus\ldots\oplus V_{k}$
+			\item $\dim V_{i} = n_{i},\quad i=1-k$
+			\item El operador $T-\lambda_{i}I:V_{i}\rightarrow V_{i}$ es nilpotente, $i=1-k$. (Aquí se aplica la propiedad ya antes mencionada para un operador nilpotente)
+			
+			
+		\end{enumerate}
+	\end{mytheo}
+	\noindent Ahora introduciremos algunos métodos numéricos que nos permiten calcular los valores y vectores  propios de una matriz, los cuales son necesarios para construir la forma canónica de Jordan de una matriz.
+	\subsection{Métodos para calcular valores propios}
+	\subsubsection{Método potencia}
+	\noindent Dada una matriz $A\in \mathbb{R}^{n\times n}$, este método calcula el mayor valor propio de $A$ y el vector propio asociado a este valor propio, mediante iteraciones.
+	Es decir, dada la siguiente relación de recurrencia :\begin{equation*}
+	q^{(k+1)} = \frac{1}{\phi_{k}}Aq^{(k)},\quad donde\;\phi_{k} = \Vert Aq^{(k)}\Vert    
+	\end{equation*} e inicializando con algún vector $q^{(0)}$, al realizar las iteraciones la sucesión converge al autovector asociado al mayor valor propio.
+	
+	\noindent\textit{\textbf{Convergencia del Método Potencia}}
+	\begin{itemize}
+		\item Caso general:\\
+		Sea $\wedge(A)=\{\lambda_{1},\ldots,\lambda_{k}\}$ el esprectro de $A$ y $m_{1}, \ldots , m_{k}\in\mathbb{N}$ multiplicidades geométricas de $\lambda_{1},\lambda_{2},\ldots ,\lambda_{k}$ respectivamente (no necesariamente\\ $V=V_{1}\oplus V_{2}\oplus V_{3}\oplus\ldots\oplus V_{k},\ V_{i}$ espacio propio de $\lambda_{i}$).
+		Sin pérdida de la generalidad, sea:
+		$$\vert\lambda_{1}\vert > \vert\lambda_{2}\vert > \vert\lambda_{3}\vert > \ldots>\vert\lambda_{k}\vert$$
+		Ahora sea $q^{(0)}\in\left<\bigcup_{i=1}^{k}V_{i}\right>$
+		$$\Rightarrow\quad q^{(0)} = \sum_{i=1}^{m_{1}}c_{i}^{(1)}v_{i}^{(1)} + \sum_{r=1}^{k}\sum_{j=1}^{m_{r}}c_{j}^{(r)}v_{j}^{(r)}$$
+		donde $v_{j}^{(i)}$: vector j-ésimo del espacio propio $v_{i}$.
+		
+		
+		
+		En este caso la sucesión $$q^{(k+1)}=\frac{1}{\phi_{k}}Aq^{(k)}$$ converge a un múltiplo del vector propio asociado a mayor valor propio.\\
+	\end{itemize}
+	
+	Ahora, se construye la siguiente sucesión que converge al valor propio $\lambda_{1}$.
+	\begin{equation}\label{eigenvalue_iter}
+	u^{(k+1)} = \frac{1}{\phi_{k}}\frac{(Aq^{(k)})_{j}}{q^{(k)}_{j}}
+	\end{equation}
+	donde $(Aq^{(k)})_{j}$ es el j-ésimo elemento de $Aq^{(k)}$ y $q^{(k)}_{j}$ es el j-ésimo elemento de $q^{(k)}.$\\
+	Así las ecuaciones (1) y (2) nos servirán para hallar el vector propio y su respectivo valor propio siendo este el máximo.
 	
 	
-\end{enumerate}
-\end{mytheo}
-\noindent Ahora introduciremos algunos métodos numéricos que nos permiten calcular los valores y vectores  propios de una matriz, los cuales son necesarios para construir la forma canónica de Jordan de una matriz.
-\subsection{Métodos para calcular valores propios}
-\subsubsection{Método potencia}
-\noindent Dada una matriz $A\in \mathbb{R}^{n\times n}$, este método calcula el mayor valor propio de $A$ y el vector propio asociado a este valor propio, mediante iteraciones.
-Es decir, dada la siguiente relación de recurrencia :\begin{equation*}
-    q^{(k+1)} = \frac{1}{\phi_{k}}Aq^{(k)},\quad donde\;\phi_{k} = \Vert Aq^{(k)}\Vert    
-\end{equation*} e inicializando con algún vector $q^{(0)}$, al realizar las iteraciones la sucesión converge al autovector asociado al mayor valor propio.
-
-\noindent\textit{\textbf{Convergencia del Método Potencia}}
-\begin{itemize}
-\item Caso general:\\
-Sea $\wedge(A)=\{\lambda_{1},\ldots,\lambda_{k}\}$ el esprectro de $A$ y $m_{1}, \ldots , m_{k}\in\mathbb{N}$ multiplicidades geométricas de $\lambda_{1},\lambda_{2},\ldots ,\lambda_{k}$ respectivamente (no necesariamente\\ $V=V_{1}\oplus V_{2}\oplus V_{3}\oplus\ldots\oplus V_{k},\ V_{i}$ espacio propio de $\lambda_{i}$).
-Sin pérdida de la generalidad, sea:
-$$\vert\lambda_{1}\vert > \vert\lambda_{2}\vert > \vert\lambda_{3}\vert > \ldots>\vert\lambda_{k}\vert$$
-Ahora sea $q^{(0)}\in\left<\bigcup_{i=1}^{k}V_{i}\right>$
-$$\Rightarrow\quad q^{(0)} = \sum_{i=1}^{m_{1}}c_{i}^{(1)}v_{i}^{(1)} + \sum_{r=1}^{k}\sum_{j=1}^{m_{r}}c_{j}^{(r)}v_{j}^{(r)}$$
-donde $v_{j}^{(i)}$: vector j-ésimo del espacio propio $v_{i}$.
-
-
-
-En este caso la sucesión $$q^{(k+1)}=\frac{1}{\phi_{k}}Aq^{(k)}$$ converge a un múltiplo del vector propio asociado a mayor valor propio.\\
-\end{itemize}
-
-Ahora, se construye la siguiente sucesión que converge al valor propio $\lambda_{1}$.
-\begin{equation}\label{eigenvalue_iter}
-u^{(k+1)} = \frac{1}{\phi_{k}}\frac{(Aq^{(k)})_{j}}{q^{(k)}_{j}}
-\end{equation}
-donde $(Aq^{(k)})_{j}$ es el j-ésimo elemento de $Aq^{(k)}$ y $q^{(k)}_{j}$ es el j-ésimo elemento de $q^{(k)}.$\\
-Así las ecuaciones (1) y (2) nos servirán para hallar el vector propio y su respectivo valor propio siendo este el máximo.
-
-
-\noindent\textbf{\textit{Deflacción}}\\
-\noindent Luego que se ha obtenido $\lambda_{1}$ el autovalor máximo y $x_{1}$ su autovector propio asociado mediante el método de la potencia de una matriz $A^{n\times n}$, utilizaremos la deflacción para hallar una matriz más simple que tenga los mismos autovalores que $A$ sin contar el autovalor ya calculado, es decir, el $\lambda_{1}$. Como esta matriz tendrá los mismos autovalores de $A$ ( sin el $\lambda_{1}$), podemos aplicarle el método de la potencia para hallar el siguiente autovalor ($\lambda_{2}$) y luego volver a aplicar la deflación para hallar una matriz más simple que contenga los mismos autovalores de $A$ pero sin $\lambda_{1}$ y $\lambda_{2}$, con el método de la potencia obtenemos otro autovalor $\lambda_{3}$ y así recursivamente encontramos todos los autovalores de $A$.
-Esto sigue el siguiente esquema:\\
-Sea $x$ un autovector de $A$ y $\lambda $ su correspondiente autovalor y sea $U$ una matriz $n\times(n-1)$ tal que $(x,U)$ sea unitario, ya que $Ax=\lambda x$ y $A(x,A)=(Ax,AU)$, tenemos$$(x,U)^{H}A(x,U)=\left(\begin{array}{c}
-    x^{H} \\
-     U^{H} 
-\end{array}\right)\left(\lambda x,AU\right)$$ $$=\newline \left(\begin{array}{cc}
-   \lambda x^{H}x  &  x^{H}AU\\
-   \lambda U^{H}x  & U^{H}AU
-\end{array}\right)$$
-Ahora $x^{H}x=1$  y $x$ es ortogonal a las columnas de $U$, es decir, $U^{H}x=0$. Luego:\\
-$$(x,U)^{H}A(x,U)=\left(\begin{array}{cc}
-  \lambda   &  h^{H}\\
-    0 & C
-\end{array}\right)...(*)$$ Donde $C=U^{H}AU$ es de orden  $(n-1)\times (n-1)$ y $h^{H}=x^{H}AU$. Así la matriz(*) tiene como autovalores a $\lambda$ y a los autovalores de $C$ y como esta matriz es semejante a $A$ tienen los mismos autovalores, por ello sólo bastaría ahora hallar los autovalores de la matriz $C$.\\
-Ahora, para determinar $U$ usamos las transformaciones de Householder.\\
-
-\noindent\textbf{Propiedad}\\
-\noindent Si $x \in\mathbb{R}^n, \ x_{1}$ su primera componente, $x\neq0$, $ \sigma=sign(x_{1})\|x\|_{2}$ donde $sign(0)=+1$, y si $w=x+\sigma e^{(1)} \ y \ \theta=\frac{1}{2}{\|w\|}^{2}_{2}$, \ luego $$W=I-\frac{1}{\theta}ww^{H}$$ es la transformación de Householder con $Wx=-\sigma e^{(1)}$.\\
-Siendo $\lambda$ el autovalor hallado de $A$ y $x$ su respectivo autovector. Construiremos la transformación $T$ usando la propiedad de modo que:  $$Tx=-sign(x_{1})\|x\|_{2}e^{(1)}=-sign(x_{1})e^{(1)}$$ asumiendo además $\|x\|_{2}=1$, luego:\\
-$$T^{2}x=-sign(x_{1})Te^{(1)}$$ya que $T$ es unitaria. De aquí se obtiene $Te^{(1)}=-sign(x_{1})x$. De esto, la primera columna de $T$ es el autovector $-sign(x_{1})x$. Por lo tanto $T=(-sign(x_{1})x,U)$ donde $U$ resulta ser unitario de orden $n\times(n-1)$, de esta forma encontramos $U$. \\
-
-\noindent Con el método de la potencia y la deflacción podremos hallar todos los autovalores de nuestra matriz, así obtenemos la forma canónica de Jordan $J$, $A=PJP^{-1}$, donde P es la matriz de cambio de base (de una base B' de V a la base formada por los $B_{i}$, como se mostró anteriormente).
-
-\noindent Ahora introduciremos otro método para calcular los autovalores de nuestra matriz $A^{n\times n}$.
-\subsubsection{Método QR:}
-\noindent El método QR es un método iterativo que consiste en reducir una matriz a una forma triangular.\\ Debido a que el número de operaciones que utiliza para una matriz cualquiera es proporcional a $n^3$, primero se transformará la matriz a una matriz de Hessenberg de esta manera el número de operaciones que se utilizarán será proporcional a $n^2$, así el método será más eficiente.\\
-
-\noindent El algoritmo QR para calcular los autovalores de una matriz A consiste en dos pasos:\\
-\begin{enumerate}
-	\item Reducción de A a la forma de Hessenberg.
-	\item Aplicar la descomposición QR a la forma de Hessenberg obtenida.
-\end{enumerate}
-
-\noindent Para reducir A a su forma Hesssenberg, empleamos las transformaciones de Householder, dado $A_{1}=A$ una matriz $n\times n$. En k-ésimo paso la matriz tiene la forma:\\
-$$A_{k}=\left(\begin{array}{c c c}
-A_{11}^{(k)} & A_{12}^{(k)} & A_{13}^{(k)} \\
-0          & A_{22}^{(k)} & A_{23}^{(k)}
-\end{array}\right)$$ donde $A_{11}^{(k)}$ es $k\times (k-1)$, $A_{12}^{(k)}$ es $k\times1$, $A_{22}^{(k)}$ es $(n-k)\times1$, $A_{13}^{(k)}$ es $k\times(n-k)$ y $A_{23}^{(k)}$ es de orden $(n-k)\times(n+k)$. Sea la matriz $H_{k}$ una matriz de Householder tal que $$H_{k}A_{22}^{(k)}=\pm\|A_{22}^{(k)}\|e^{(1)}$$ donde $e^{(1)}$ es el primer vector unitario en $\mathbb{R}^{(n-k)}$
-y dado $$U_{k}=\left(\begin{array}{cc}
-I_{k}  & 0 \\
-0 & H_{k}
-\end{array}\right)$$
-Luego, $A_{k+1}=U_{k}^{H}AU_{k}=U_{k}AU_{k}$
-$$=\newline\left(\begin{array}{c c c}
-A_{11}^{(k)}    & A_{12}^{(k)}                  & A_{13}^{(k)}H_{k} \\
-0             & \pm\|A_{22}^{(k)}\|e_{1}^{(1)} & H_{k}A_{23}^{(k)}H_{k}
-\end{array}\right)$$\\
-el cual conduce a la matriz de Hessenberg.Finalmente la matriz de Hessenberg es la matriz de la forma:\\
-$$A_{n-1}=U_{n-2}^{H}U_{n-3}^{H}\dots U_{1}^{H}AU_{1}U_{2}\dots U_{n-2}$$
-Así la  matriz $A_{n-1}$ resulta ser semejante a $A$, esto es tiene los mismos autovalores. Una vez obtenida la matriz de Hessenberg $B$, se procede a iterar a partir de $B_{0}=B$,$$B_{k-1} = Q_{k}R_{k}$$
-$$B_{k}=R_{K}Q_{k}, \  k=1, 2, \dots$$ tendiendo $B_{k}$ a una matriz triangular superior, cuyos elementos de la diagonal principal son los autovalores de $A$.
-
-
-\end{multicols}
-
-\noindent\textit{\underline{IMPORTANTE}}:
-El cálculo de $J(A)^{k}$, no lo realizaremos con $J(A)$, sino con los bloques de Jordan, pues sabemos:
-
-$$
-J(A)^k = \begin{bmatrix}
-J(A, \lambda_{1})^k_{q_{1}\times q_{1}}&O&\ldots&O\\
-O&J(A, \lambda_{2})^k_{q_{2}\times q_{2}}&\ldots&O\\
-\vdots&\vdots& \ddots& \vdots\\
-O&O&\ldots&J(A, \lambda_{m})^k_{q_{m}\times q_{m}}
-\end{bmatrix},
-$$
-donde $q_{i}\in\mathbb{N}$ es el menor indice tal que $Nu<(A-\lambda_{i}I)^{q_{i}}> = Nu<(A-\lambda_{i}I)^{q_{i}+1}>$.
-
-Y además tenemos la siguiente relación de recurencia para calcular la potencia $k$-ésima de los bloques de Jordan:
-
-$$J(A, \lambda_{i})^{k}=\begin{bmatrix}
-\lambda^{k} & {k \choose 1}\lambda^{k-1}   & {k \choose 2}\lambda^{k-2} & \cdots       & {k \choose m-1}\lambda^{k-m+1}\\
-& \lambda^{k}                &  {k \choose 1}\lambda^{k-1} & \dots       & {k \choose m-2}\lambda^{k-m+2}\\
-&                            &  \lambda^{k}                & \ddots     &  \vdots\\                  &                            &                             & \ddots     & {k \choose 1}\lambda^{k-1}\\                  &                            &                             &             & \lambda^{k}
-\end{bmatrix}$$
-Note que para calcular la potencia $k$-ésima de $J(A,\lambda_{i})$, no tenemos que calcular todos los elementos de $J(A, \lambda_{i})$ , sino solo calcular la primera fila y luego ir recortando el último elemento para fila siguiente.
-
-
-\begin{multicols}{2}
+	\noindent\textbf{\textit{Deflacción}}\\
+	\noindent Luego que se ha obtenido $\lambda_{1}$ el autovalor máximo y $x_{1}$ su autovector propio asociado mediante el método de la potencia de una matriz $A^{n\times n}$, utilizaremos la deflacción para hallar una matriz más simple que tenga los mismos autovalores que $A$ sin contar el autovalor ya calculado, es decir, el $\lambda_{1}$. Como esta matriz tendrá los mismos autovalores de $A$ ( sin el $\lambda_{1}$), podemos aplicarle el método de la potencia para hallar el siguiente autovalor ($\lambda_{2}$) y luego volver a aplicar la deflación para hallar una matriz más simple que contenga los mismos autovalores de $A$ pero sin $\lambda_{1}$ y $\lambda_{2}$, con el método de la potencia obtenemos otro autovalor $\lambda_{3}$ y así recursivamente encontramos todos los autovalores de $A$.
+	Esto sigue el siguiente esquema:\\
+	Sea $x$ un autovector de $A$ y $\lambda $ su correspondiente autovalor y sea $U$ una matriz $n\times(n-1)$ tal que $(x,U)$ sea unitario, ya que $Ax=\lambda x$ y $A(x,A)=(Ax,AU)$, tenemos$$(x,U)^{H}A(x,U)=\left(\begin{array}{c}
+	x^{H} \\
+	U^{H} 
+	\end{array}\right)\left(\lambda x,AU\right)$$ $$=\newline \left(\begin{array}{cc}
+	\lambda x^{H}x  &  x^{H}AU\\
+	\lambda U^{H}x  & U^{H}AU
+	\end{array}\right)$$
+	Ahora $x^{H}x=1$  y $x$ es ortogonal a las columnas de $U$, es decir, $U^{H}x=0$. Luego:\\
+	$$(x,U)^{H}A(x,U)=\left(\begin{array}{cc}
+	\lambda   &  h^{H}\\
+	0 & C
+	\end{array}\right)...(*)$$ Donde $C=U^{H}AU$ es de orden  $(n-1)\times (n-1)$ y $h^{H}=x^{H}AU$. Así la matriz(*) tiene como autovalores a $\lambda$ y a los autovalores de $C$ y como esta matriz es semejante a $A$ tienen los mismos autovalores, por ello sólo bastaría ahora hallar los autovalores de la matriz $C$.\\
+	Ahora, para determinar $U$ usamos las transformaciones de Householder.\\
+	
+	\noindent\textbf{Propiedad}\\
+	\noindent Si $x \in\mathbb{R}^n, \ x_{1}$ su primera componente, $x\neq0$, $ \sigma=sign(x_{1})\|x\|_{2}$ donde $sign(0)=+1$, y si $w=x+\sigma e^{(1)} \ y \ \theta=\frac{1}{2}{\|w\|}^{2}_{2}$, \ luego $$W=I-\frac{1}{\theta}ww^{H}$$ es la transformación de Householder con $Wx=-\sigma e^{(1)}$.\\
+	Siendo $\lambda$ el autovalor hallado de $A$ y $x$ su respectivo autovector. Construiremos la transformación $T$ usando la propiedad de modo que:  $$Tx=-sign(x_{1})\|x\|_{2}e^{(1)}=-sign(x_{1})e^{(1)}$$ asumiendo además $\|x\|_{2}=1$, luego:\\
+	$$T^{2}x=-sign(x_{1})Te^{(1)}$$ya que $T$ es unitaria. De aquí se obtiene $Te^{(1)}=-sign(x_{1})x$. De esto, la primera columna de $T$ es el autovector $-sign(x_{1})x$. Por lo tanto $T=(-sign(x_{1})x,U)$ donde $U$ resulta ser unitario de orden $n\times(n-1)$, de esta forma encontramos $U$. \\
+	
+	\noindent Con el método de la potencia y la deflacción podremos hallar todos los autovalores de nuestra matriz, así obtenemos la forma canónica de Jordan $J$, $A=PJP^{-1}$, donde P es la matriz de cambio de base (de una base B' de V a la base formada por los $B_{i}$, como se mostró anteriormente).
+	
+	\noindent Ahora introduciremos otro método para calcular los autovalores de nuestra matriz $A^{n\times n}$.
+	\subsubsection{Método QR:}
+	\noindent El método QR es un método iterativo que consiste en reducir una matriz a una forma triangular.\\ Debido a que el número de operaciones que utiliza para una matriz cualquiera es proporcional a $n^3$, primero se transformará la matriz a una matriz de Hessenberg de esta manera el número de operaciones que se utilizarán será proporcional a $n^2$, así el método será más eficiente.\\
+	
+	\noindent El algoritmo QR para calcular los autovalores de una matriz A consiste en dos pasos:\\
+	\begin{enumerate}
+		\item Reducción de A a la forma de Hessenberg.
+		\item Aplicar la descomposición QR a la forma de Hessenberg obtenida.
+	\end{enumerate}
+	
+	\noindent Para reducir A a su forma Hesssenberg, empleamos las transformaciones de Householder, dado $A_{1}=A$ una matriz $n\times n$. En k-ésimo paso la matriz tiene la forma:\\
+	$$A_{k}=\left(\begin{array}{c c c}
+	A_{11}^{(k)} & A_{12}^{(k)} & A_{13}^{(k)} \\
+	0          & A_{22}^{(k)} & A_{23}^{(k)}
+	\end{array}\right)$$ donde $A_{11}^{(k)}$ es $k\times (k-1)$, $A_{12}^{(k)}$ es $k\times1$, $A_{22}^{(k)}$ es $(n-k)\times1$, $A_{13}^{(k)}$ es $k\times(n-k)$ y $A_{23}^{(k)}$ es de orden $(n-k)\times(n+k)$. Sea la matriz $H_{k}$ una matriz de Householder tal que $$H_{k}A_{22}^{(k)}=\pm\|A_{22}^{(k)}\|e^{(1)}$$ donde $e^{(1)}$ es el primer vector unitario en $\mathbb{R}^{(n-k)}$
+	y dado $$U_{k}=\left(\begin{array}{cc}
+	I_{k}  & 0 \\
+	0 & H_{k}
+	\end{array}\right)$$
+	Luego, $A_{k+1}=U_{k}^{H}AU_{k}=U_{k}AU_{k}$
+	$$=\newline\left(\begin{array}{c c c}
+	A_{11}^{(k)}    & A_{12}^{(k)}                  & A_{13}^{(k)}H_{k} \\
+	0             & \pm\|A_{22}^{(k)}\|e_{1}^{(1)} & H_{k}A_{23}^{(k)}H_{k}
+	\end{array}\right)$$\\
+	el cual conduce a la matriz de Hessenberg.Finalmente la matriz de Hessenberg es la matriz de la forma:\\
+	$$A_{n-1}=U_{n-2}^{H}U_{n-3}^{H}\dots U_{1}^{H}AU_{1}U_{2}\dots U_{n-2}$$
+	\\
+	Así la  matriz $A_{n-1}$ resulta ser semejante a $A$, esto es tiene los mismos autovalores. Una vez obtenida la matriz de Hessenberg $B$, se procede a iterar a partir de $B_{0}=B$,$$B_{k-1} = Q_{k}R_{k}$$
+	$$B_{k}=R_{K}Q_{k}, \  k=1, 2, \dots$$ tendiendo $B_{k}$ a una matriz triangular superior, cuyos elementos de la diagonal principal son los autovalores de $A$.\\
+	
+	
+	\noindent\textit{\underline{IMPORTANTE}}:
+	El cálculo de $J(A)^{k}$, no lo realizaremos con $J(A)$, sino con los bloques de Jordan, pues sabemos:
+	
+	$$
+	J(A)^k = \begin{bmatrix}
+	U_{1}&O&\ldots&O\\
+	O&U_{2}&\ldots&O\\
+	\vdots&\vdots& \ddots& \vdots\\
+	O&O&\ldots&U_{m}
+	\end{bmatrix},
+	$$
+	$$ con \ U_{i}=J(A, \lambda_{i})^k_{q_{i}\times q_{i}, \ i=1, 2,..., m}$$
+	\\
+	%$$
+	%J(A)^k = $$$$\begin{bmatrix}
+	%J(A, \lambda_{1})^k_{q_{1}\times q_{1}}&O&\ldots&O\\
+	%O&J(A, \lambda_{2})^k_{q_{2}\times q_{2}}&\ldots&O\\
+	%\vdots&\vdots& \ddots& \vdots\\
+	%O&O&\ldots&J(A, \lambda_{m})^k_{q_{m}\times q_{m}}
+	%\end{bmatrix},
+	%$$
+	donde $q_{i}\in\mathbb{N}$ es el menor indice tal que $Nu<(A-\lambda_{i}I)^{q_{i}}> = Nu<(A-\lambda_{i}I)^{q_{i}+1}>$.
+	
+	\noindent Y además tenemos la siguiente relación de recurencia para calcular la potencia $k$-ésima de los bloques de Jordan:
+	
+	$$J(A, \lambda_{i})^{k}=$$$$\begin{bmatrix}
+	\lambda^{k} & {k \choose 1}\lambda^{k-1}   & {k \choose 2}\lambda^{k-2} & \cdots       & {k \choose m-1}\lambda^{k-m+1}\\
+	& \lambda^{k}                &  {k \choose 1}\lambda^{k-1} & \dots       & {k \choose m-2}\lambda^{k-m+2}\\
+	&                            &  \lambda^{k}                & \ddots     &  \vdots\\                  &                            &                             & \ddots     & {k \choose 1}\lambda^{k-1}\\                  &                            &                             &             & \lambda^{k}
+	\end{bmatrix}$$
+	Note que para calcular la potencia $k$-ésima de $J(A,\lambda_{i})$, no tenemos que calcular todos los elementos de $J(A, \lambda_{i})$ , sino solo calcular la primera fila y luego ir recortando el último elemento para fila siguiente.
+	
+	
+	
+	
+	
+	%\end{multicols}
+	
+	
+	
+	
+	%\begin{multicols}{2}
 	\section{Análisis}
 	
 	\noindent\textbf{ Problema a resolver:}\\
@@ -458,6 +392,7 @@ Note que para calcular la potencia $k$-ésima de $J(A,\lambda_{i})$, no tenemos 
 	0& 0& 0& 0&  0&  0&  0& 0& 0& 0& 0& 1
 	\end{bmatrix}
 	\end{equation}
+	donde $s$ es la bonificación plus que se determina dependiendo de la semana (en la semana 10, $s=5$).
 	
 	\item A continuación procederemos a calcular la potencia k-esima de la matriz  (\ref{item1}), de forma indirecta, es decir calcularemos la matriz de jordan de la matriz A. Y usando la siguiente relación entre $J(A)$ y $A$.
 	$$A^{k} = PJ(A)^{k}P^{-1}$$
@@ -507,6 +442,4 @@ Note que para calcular la potencia $k$-ésima de $J(A,\lambda_{i})$, no tenemos 
 		%
 	\end{list}
 \end{multicols}
-
-
 \end{document}
