@@ -8,7 +8,7 @@ Bienvenido al repositorio grupal denominado *Tiro-en-dina* del Curso CM-334.
 En este repositorio podras encontrar lo siguiente:
 * Teoria de la forma canónica de jordan. Miralos [aquí](https://github.com/MillerSilva/Tiro-en-Diana/tree/master/LatexPresentacion/Jordan_teoria)
 * El informe final del proyecto. Miralos [aquí](https://github.com/MillerSilva/Tiro-en-Diana/blob/master/LatexPresentacion/Tiro_en_diana.pdf)
-* La presentacón del proyecto en beamer. Miralos [aquí](https://github.com/MillerSilva/Tiro-en-Diana/tree/master/beamer/presentacion_final)
+* La presentacón del proyecto en beamer. Miralos [aquí](https://github.com/MillerSilva/Tiro-en-Diana/blob/master/beamer/presentacion_final/proyect_final.pdf)
 * Los codigos Python (Usando [Sympy](https://www.sympy.org/en/index.html)) usados en la presentación del trabajo. Miralos [aquí](https://nbviewer.jupyter.org/github/MillerSilva/Tiro-en-Diana/blob/master/Presentacion.ipynb)
 * Los codigos Python del proyecto (tanto de forma **simbolica** como **numérica**). Miralos [aquí](https://nbviewer.jupyter.org/github/MillerSilva/Tiro-en-Diana/blob/master/proyecto2_numerico.ipynb)
 
