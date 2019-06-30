@@ -1,0 +1,217 @@
+\documentclass[utf8,spanish,xcolor={svgnames},12pt,handout]{beamer}
+
+\uselanguage{spanish}
+\languagepath{spanish}
+
+\usetheme{Warsaw}
+\usecolortheme{crane}
+%\useinnertheme{rectangles}
+%\useoutertheme{sidebar}
+%\usefonttheme[onlymath]{serif}
+\usepackage{graphicx}
+\newcommand{\ds}{\displaystyle}
+
+\title{Tiro en diana}
+\subtitle{Trabajo final del curso de Análisis Numérico I}
+\author[Lozano \\Geronimo \\Borjas \\Silva\\ Coronado]{Gustavo Lozano\\ Mirian Geronimo\\ Guillermo Borjas\\Miller Silva\\ Ayrton Coronado}
+\date{2019}
+
+
+\begin{document}
+
+%\begin{frame}
+%\titlepage
+%\end{frame}
+
+%\begin{frame}
+%\tableofcontents
+%\end{frame}
+
+\frame{\titlepage}
+ 
+ 
+\begin{frame}
+	\frametitle{Introducción}
+ Para muchas ramas de la matemática como las ecuaciones diferenciales o procesos estocásticos, resulta de gran utilidad para los desarrollos teóricos y aplicaciones el poder descomponer matrices en la forma $A=PDP^{-1}$ con $D$ diagonal, no todas las matrices son diagonalizables es por eso que haremos uso de la descomposición de Jordan ya que esta es una
+ descomposición que generaliza a la diagonalización y que también tiene la particularidad de facilitar los cálculos.
+\end{frame}
+ 
+\begin{frame}
+	\frametitle{Funciones de Matrices}
+	Sea $A\in\mathbb{C}^{n\times n}$, sabemos:
+	\begin{align*}
+	e^{A} 	&= \ds\sum_{m=0}^{\infty}\frac{A^{m}}{m!}\\
+	&= P^{-1}\ds\sum_{m=0}^{\infty}\frac{J^{m}}{m!}P\\
+	&= P^{-1}e^{J}P
+	\end{align*}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Fundamento Teórico}
+Sea $T: V\rightarrow V$ y $\rho(A) = \{\lambda_{1},\ldots ,\lambda_{k}\}$. Entonces es posible:
+$$V = V_{1}\oplus V_{2}\ldots\oplus V_{k}\oplus U$$
+Donde $V_{i}$ es el espacio propio asociodo a $\lambda_{i}$.
+Si $\beta_{i}$ es base de $V_{i},\quad i=1-k$ y $\beta_{k+1}$ es base de $U$.Asi $\beta = \bigcup_{i=0}^{k+1}\beta_{i}$ es base de $V$. Además:
+\begin{equation*}
+[T]_{\beta_{i}} = \begin{bmatrix}
+\lambda_{i}	&	1	&	&	&\\
+			&	\lambda_{i}	&	1	&	&\\
+			&				&	\ddots	&	&\\
+			&				&			&	&1\\
+			&				&			&	&\lambda_{i}
+\end{bmatrix}_{q_{i}\times q_{i}}
+\hspace{-0.85cm}
+,[T]_{\beta_{k+1}} = \begin{bmatrix}
+a_{11}	&	*	& * &\ldots	&	*&\\
+			&	a_{22}	&	*	&	&\\
+			&				&	\ddots	&	&\\
+			&				&			&	&*\\
+			&				&			&	&a_{nn}
+\end{bmatrix}
+\end{equation*}
+Donde $q_{i}$ es el menor indice tal que $\left<N(T-\lambda_{i}I)^{q_{i}}\right> = \left<N(T-\lambda_{i}I)^{q_{i}+1}\right>$
+\end{frame}
+
+\begin{frame}
+\frametitle{Fundamento Teórico}
+Por lo tanto:
+\begin{equation*}
+[T]_{\beta} = J(T) = 
+\begin{bmatrix}
+[T]_{\beta_{1}}	&					&			&					&	\\
+				&	[T]_{\beta_{2}} &			&					&	\\
+				&					&	\ddots	&					&	\\
+				&					&			&	[T]_{\beta_{k}} & 	\\
+				&					&			&					&[T]_{\beta_{k+1}}
+\end{bmatrix}
+\end{equation*}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Fundamento teórico}
+Como:
+$$A = P^{-1}JP\quad, \text{J es la forma canónica de Jordan}$$
+Entonces $A^{n} = P^{-1}J^{n}P$, además:
+\begin{equation*}
+J^{n} = \begin{bmatrix}
+[T]_{\beta_{1}}^{n}	&					&			&					&	\\
+				&	[T]_{\beta_{2}}^{n} &			&					&	\\
+				&					&	\ddots	&					&	\\
+				&					&			&	[T]_{\beta_{k}}^{n} & 	\\
+				&					&			&					&[T]_{\beta_{k+1}}^{n}
+\end{bmatrix}
+\end{equation*}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Fundamento teórico}
+
+\begin{equation*}
+[T]_{\beta_{i}}^{n} = 
+\begin{bmatrix}
+	\lambda^{n} 	& {n \choose 1}\lambda^{n-1}   	& {n \choose 2}\lambda^{n-2} 	& 	\ldots      & {n \choose q_{i}-1}\lambda^{n-q_{i}+1}\\
+					& \lambda^{n}                	&  {n \choose 1}\lambda^{n-1} 	& \dots       	& {n \choose q_{i}-2}\lambda^{n-q_{i}+2}\\
+					&                            	&  \lambda^{n}                	& \ddots     	&  \vdots\\                  
+					&                            	&                             	& \ddots     	& {n \choose 1}\lambda^{n-1}\\                  
+					&                            	&                             	&             	& \lambda^{n}
+\end{bmatrix}\quad i=1-k
+\end{equation*}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Análisis}
+	\begin{itemize}
+		
+		\item Agruparemos los puntajes de las practicas de tiro para los Caballeros Cadetes en una matriz $A$, donde $A_{ij}$ representa la puntuación del tiro $j-$esimo en la $i-$esima diana. Asi obtenemos:
+		\vspace*{-0.2cm}
+		\setcounter{MaxMatrixCols}{20}
+		\begin{equation}\label{item1}
+		A = \begin{bmatrix}
+		1& 0& 0& 0&  0&  0&  0& 0& 0& 0& 0& 0\\
+		0& s& 0& 0&  0&  0&  0& 0& 0& 0& 0& 0\\
+		1& 1& s& 0&  0&  0&  0& 0& 0& 0& 0& 0\\
+		0& 0& 0& 1& -1&  2& -1& 0& 0& 0& 0& 0\\
+		0& 0& 0& 0&  1&  0&  0& 0& 0& 0& 0& 0\\
+		0& 0& 0& 0&  0& -1&  1& 0& 0& 0& 0& 0\\
+		0& 0& 0& 0&  0&  0&  1& 0& 0& 0& 0& 0\\
+		0& 0& 0& 0&  0&  0&  0& 1& s& 0& 0& 0\\
+		0& 0& 0& 0&  0&  0&  0& 0& 1& s& 0& 0\\
+		0& 0& 0& 0&  0&  0&  0& 0& 0& 1& s& 0\\
+		0& 0& 0& 0&  0&  0&  0& 0& 0& 0& 1& s\\
+		0& 0& 0& 0&  0&  0&  0& 0& 0& 0& 0& 1
+		\end{bmatrix}
+		\end{equation}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Análisis}
+	\begin{itemize}
+		\item Procederemos a calcular la potencia k-esima de la matriz  (\ref{item1}), usando la siguiente relación entre $J(A)$ y $A$.
+		$$A^{k} = PJ(A)^{k}P^{-1}$$
+			\begin{center}
+				\includegraphics[page=2, trim= 4cm 2cm 0cm 4cm ,clip,scale=0.36]{MatrixSimb}
+			\end{center}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Análisis}
+	\begin{itemize}
+			\item La matriz de puntuaciones de la semana  10 es (s=5):
+			\begin{center}
+				\includegraphics[page=3,trim= 4.3cm 4cm 4cm 4cm, clip, scale=0.5]{MatrixSimb}
+			\end{center}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Análisis}
+	\begin{itemize}
+		\item Como la puntación final de una semana se obtiene calculando la norma de la matriz. Asi para semana 10 tenemos las siguientes puntuaciones finales(dependen de la norma que se utilice):
+		\begin{itemize}
+			\item $\Vert A^{10}\Vert_{\infty} = 31738281.0000000$
+			\item $\Vert A^{10}\Vert_{1} = 29296875.0000000$
+		\end{itemize}
+		$\therefore$ Por lo tanto el Caballero Cadete será beneficiado si su puntuación se calcula con la norma del máximo $(\Vert .\Vert_{\infty})$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Conclusiones}
+	\begin{itemize}
+		
+		
+		\item Efectivamente el uso de la forma de Hessengber usando el m\'etodo de QR reduce la cantidad de operaciones de $O(n^3)$ a $O(n^2)$, aumentando la eficiencia en la obtenci\'on de los c\'alculos realizados por la m\'aquina.
+		\item Al calcular la potencia n-\'esima de la matriz de jordan, se usó los bloques de jordan, con ello reducimos la cantidad de operaciones realizadas por la m\'aquina.
+		\item El algoritmo implementado para obtener la n-\'esima potencia de la matriz de Jordan, puede ser utilizado para calcular funciones de matrices que puedan ser expresados mediante series de Taylor, dado que para esto solo ser\'a necesario realizar una sumatoria de su forma de Jordan elevado a un exponente '$k$'.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		
+		\item Si us\'aramos el m\'etodo de potencia en una matriz sim\'etrica, su convergencia sería más r\'apida que en una no sim\'etrica porque el radio de convergencia en una matriz no sim\'etrica es: $O(|\lambda_2/\lambda_1|^m)$
+		y en una matriz sim\'etrica es $O(|\lambda_2/\lambda_1|^{2m})$.
+		
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.3]{convergencia.png}
+			\caption{Convergencia entre un matriz sim\'etrica y una no sim\'etrica}
+			\label{fig:my_label}
+		\end{figure}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item Nuestra matriz al no ser diagonalizable, gener\'o 6 bloques de Jordan de los cuales uno de ellos depende de la variable '$s$', esto genera una p\'erdida en el rendimiento del algoritmo dado que a bloques de mayor tamaño, mayor es la cantidad de cálculos hechos por la m\'aquina.
+	\end{itemize}
+\end{frame}
+
+\end{document}
