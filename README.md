@@ -3,24 +3,32 @@ Segundo trabajo grupal del curso de Análisis Numérico I - (UNI)
 ===
 Bienvenido al repositorio grupal denominado *Tiro-en-dina* del Curso CM-334.
 
+## Indice rápido
+
+En este repositorio podras encontrar lo siguiente:
+* Teoria de la forma canónica de jordan. Miralos [aquí](https://github.com/MillerSilva/Tiro-en-Diana/tree/master/LatexPresentacion/Jordan_teoria)
+* El informe final del proyecto. Miralos [aquí](https://github.com/MillerSilva/Tiro-en-Diana/blob/master/LatexPresentacion/Tiro_en_diana.pdf)
+* La presentacón del proyecto en beamer. Miralos [aquí](https://github.com/MillerSilva/Tiro-en-Diana/tree/master/beamer/presentacion_final)
+* Los codigos Python (Usando [Sympy](https://www.sympy.org/en/index.html)) usados en la presentación del trabajo. Miralos [aquí](https://nbviewer.jupyter.org/github/MillerSilva/Tiro-en-Diana/blob/master/Presentacion.ipynb)
+* Los codigos Python del proyecto (tanto de forma **simbolica** como **numérica**). Miralos [aquí](https://nbviewer.jupyter.org/github/MillerSilva/Tiro-en-Diana/blob/master/proyecto2_numerico.ipynb)
+
+
+
+## Sofware
+
+* Python ([Numpy](https://www.numpy.org/), [Scipy](https://www.scipy.org/), [Sympy](https://www.sympy.org/en/index.html))
+* [Git](https://git-scm.com/)
+
+
+
 ## Comandos `git`
 
 ```git
-git pull    # Descargar cambios
-git add     # Confirmar cambios
-git commit  # Comentar cambios
-git push    # Subir cambios
+git pull origin master    # Descargar cambios
+git add nombre_archivo    # Confirmar cambios
+git commit -m "Algun mensaje descriptivo" # Comentar cambios
+git push origin master   # Subir cambios
 ```
-
-### Ejemplo de rutina
-
-```bash
-miller@Bobby:~$ git pull
-miller@Bobby:~$ git add --all
-miller@Bobby:~$ git commit -m "Initial Commit"
-miller@Bobby:~$ git push -u origin master
-```
-
 
 ### Libros de Lectura
 * Análisis Numérico
